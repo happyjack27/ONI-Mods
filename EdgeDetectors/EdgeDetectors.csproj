@@ -84,7 +84,9 @@
     <Compile Include="FallingEdgeGateConfig.cs" />
     <Compile Include="Patches.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EdgeCounter.cs" />
     <Compile Include="RisingEdgeCounter.cs" />
+    <Compile Include="EdgeCounterConfig .cs" />
     <Compile Include="RisingEdgeCounterConfig.cs" />
     <Compile Include="RisingEdgeGate.cs" />
     <Compile Include="RisingEdgeGateConfig.cs" />

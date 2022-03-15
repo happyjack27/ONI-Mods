@@ -52,6 +52,10 @@ namespace EdgeDetectors
                 StringUtils.AddBuildingStrings(RisingEdgeCounterConfig.ID, RisingEdgeCounterConfig.NAME, RisingEdgeCounterConfig.DESC, RisingEdgeCounterConfig.EFFECT);
                 StringUtils.AddStringTypes(typeof(RisingEdgeCounterConfig));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, RisingEdgeCounterConfig.ID);
+
+                //StringUtils.AddBuildingStrings(EdgeCounterConfig.ID, EdgeCounterConfig.NAME, EdgeCounterConfig.DESC, EdgeCounterConfig.EFFECT);
+                //StringUtils.AddStringTypes(typeof(EdgeCounterConfig));
+                //ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, EdgeCounterConfig.ID);
             }
 
             /*
@@ -76,6 +80,7 @@ namespace EdgeDetectors
                     Db.Get().Techs.Get("LogicCircuits").unlockedItemIDs.Add(RisingEdgeGateConfig.ID);
                     Db.Get().Techs.Get("LogicCircuits").unlockedItemIDs.Add(FallingEdgeGateConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(RisingEdgeCounterConfig.ID);
+                    //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(EdgeCounterConfig.ID);
                     //BuildingUtils.AddBuildingToTechnology("Multiplexing", LogicGateDiodeConfig.ID);
                     //BuildingUtils.AddBuildingToTechnology("LogicCircuits", LogicGate3AndConfig.ID);
                 }

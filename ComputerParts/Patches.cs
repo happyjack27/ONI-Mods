@@ -41,9 +41,27 @@ namespace KBComputing
                 StringUtils.AddStringTypes(typeof(Reg4Config));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Reg4Config.ID);
 
+                StringUtils.AddBuildingStrings(TDeMuxConfig.ID, TDeMuxConfig.NAME, TDeMuxConfig.DESC, TDeMuxConfig.EFFECT);
+                StringUtils.AddStringTypes(typeof(TDeMuxConfig));
+                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, TDeMuxConfig.ID);
+
+                StringUtils.AddBuildingStrings(TMuxConfig.ID, TMuxConfig.NAME, TMuxConfig.DESC, TMuxConfig.EFFECT);
+                StringUtils.AddStringTypes(typeof(TMuxConfig));
+                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, TMuxConfig.ID);
+
                 StringUtils.AddBuildingStrings(Ram8Config.ID, Ram8Config.NAME, Ram8Config.DESC, Ram8Config.EFFECT);
                 StringUtils.AddStringTypes(typeof(Ram8Config));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Ram8Config.ID);
+
+                /*
+                StringUtils.AddBuildingStrings(Base2x2EveryTickConfig.ID, Base2x2EveryTickConfig.NAME, Base2x2EveryTickConfig.DESC, Base2x2EveryTickConfig.EFFECT);
+                StringUtils.AddStringTypes(typeof(Base2x2EveryTickConfig));
+                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Base2x2EveryTickConfig.ID);
+
+                StringUtils.AddBuildingStrings(Base2x2OnChangeConfig.ID, Base2x2OnChangeConfig.NAME, Base2x2OnChangeConfig.DESC, Base2x2EveryTickConfig.EFFECT);
+                StringUtils.AddStringTypes(typeof(Base2x2OnChangeConfig));
+                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Base2x2OnChangeConfig.ID);
+                */
             }
 
             [HarmonyPatch(typeof(Db))]
@@ -53,7 +71,12 @@ namespace KBComputing
                 public static void Postfix()
                 {
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Reg4Config.ID);
+                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TDeMuxConfig.ID);
+                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TMuxConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Ram8Config.ID);
+                    //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2EveryTickConfig.ID);
+                    //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2OnChangeConfig.ID);
+                    //Base2x2OnChangeConfig
                 }
             }
         }

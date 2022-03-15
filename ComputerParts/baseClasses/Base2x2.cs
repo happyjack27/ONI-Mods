@@ -170,7 +170,7 @@ namespace KBComputing.baseClasses
             UpdateVisuals();
         }
 
-        public void UpdateVisuals()
+        public virtual void UpdateVisuals()
         {
             int bit0 = 0, bit1 = 0, bit2 = 0, bit3 = 0;
             bit0 = StoredValue == 0x0F ? 2 : StoredValue == 0x00 ? 0 : 1;

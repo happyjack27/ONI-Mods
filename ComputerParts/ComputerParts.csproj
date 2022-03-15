@@ -72,12 +72,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="baseClasses\BaseLogicOnChange.cs" />
+    <Compile Include="baseClasses\Base2x2OnChangeConfig.cs" />
     <Compile Include="baseClasses\Base4x2.cs" />
     <Compile Include="baseClasses\Base4x2Config.cs" />
     <Compile Include="baseClasses\Base2x2Config.cs" />
     <Compile Include="baseClasses\Base2x2.cs" />
     <Compile Include="Ram8.cs" />
     <Compile Include="Ram8Config.cs" />
+    <Compile Include="baseClasses\BaseLogicEveryTick.cs" />
+    <Compile Include="baseClasses\Base2x2EveryTickConfig.cs" />
+    <Compile Include="TMux.cs" />
+    <Compile Include="TDeMux.cs" />
+    <Compile Include="TMuxConfig.cs" />
+    <Compile Include="TDeMuxConfig.cs" />
     <Compile Include="util\ALU_opcodes.cs" />
     <Compile Include="util\BinaryFormatter.cs" />
     <Compile Include="util\BinaryUtils.cs" />
@@ -90,6 +98,10 @@
     <Compile Include="util\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="anim\assets\tdemux\tdemux_anim.bytes" />
+    <None Include="anim\assets\tdemux\tdemux_build.bytes" />
+    <None Include="anim\assets\tmux\tmux_anim.bytes" />
+    <None Include="anim\assets\tmux\tmux_build.bytes" />
     <None Include="anim\assets\4bit_reg\4bit_reg_anim.bytes" />
     <None Include="anim\assets\4bit_reg\4bit_reg_build.bytes" />
     <None Include="anim\assets\4x2\8bit.pdn" />
@@ -122,6 +134,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="anim\assets\tdemux\tdemux.png" />
+    <Content Include="anim\assets\tmux\tmux.png" />
     <Content Include="anim\assets\4bit_reg\4bit_reg.png" />
     <Content Include="anim\assets\2x2base\2x2base.png" />
     <Content Include="anim\assets\8bit_instruction_decoder\8bit_instruction_decoder.png" />

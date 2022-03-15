@@ -1,0 +1,40 @@
+﻿
+ribbon a (read channel selector)
+===============================
+channel read selector (3 bits) 
+1bb stacks, 
+000 alu, 001 instruction pointer, 010 i/o data, 011 instruction value
+
+ribbon b (write channel)
+===============================
+channel write selector (3 bits) 
+1bb stacks, 
+000 alu, 001 instruction pointer, 010 i/o data, 011 i/o address
+
+ribbon c (alu control or stack control)
+===============================
+4 bits alu operation (see below)
+
+ribbon d (predication)
+===============================
+stack operation is conditional
+status flag selector
+status flag negate
+instruction pointer increment
+
+alu operation
+===============================
+	push
+	pop
+	add
+	sub
+
+	mull
+	mulh
+	div
+	mod
+
+	or
+	and
+	xor
+	xnor

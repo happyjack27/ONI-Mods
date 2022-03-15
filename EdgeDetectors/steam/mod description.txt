@@ -1,0 +1,30 @@
+[i][b]Note:[/b] The mod has been renamed in the mods view from "Some Logic Gates" to "Edge Detectors and Diode"[/i]
+
+[list]
+[*]Falling Edge Detector
+[*]Rising Edge Detector
+[*]Diode
+[*]Rising Edge Counter
+[/list]
+
+[h1]Rising Edge Detector[/h1]
+Sends a green signal for one tick when the input goes from red to green.
+
+[h1]Falling Edge Detector[/h1]
+Sends a green signal for one tick when the input goes from green to red.
+
+[h1]Rising Edge Counter [i](NEW!)[/i][/h1]
+Counts the number of times a rising edge is observed and outputs that in binary to a ribbon.
+
+[h1]Diode[/h1]
+Copies input to output.
+The diode can be used to de-couple logic circuits, and/or to create OR gates with any number of inputs (just connect the outputs together, and that's your OR gate.)
+
+(Note also to make arbitrarily large AND gates, you just do the same thing with NOT gates, and then add a NOT gate to the output.)
+
+A AND B = NOT (NOT A OR NOT B)
+A OR B = NOT (NOT A AND NOT B)
+
+
+
+My first mod ever. :-) More to come.

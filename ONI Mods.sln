@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputerParts", "ComputerParts\ComputerParts.csproj", "{237BBF3C-F691-48C5-B57B-81BEAA05D229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeDetectors", "EdgeDetectors\EdgeDetectors.csproj", "{D8B57120-FD73-46A0-85AC-D4A934BAEB1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{237BBF3C-F691-48C5-B57B-81BEAA05D229}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237BBF3C-F691-48C5-B57B-81BEAA05D229}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237BBF3C-F691-48C5-B57B-81BEAA05D229}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237BBF3C-F691-48C5-B57B-81BEAA05D229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8B57120-FD73-46A0-85AC-D4A934BAEB1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B57120-FD73-46A0-85AC-D4A934BAEB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B57120-FD73-46A0-85AC-D4A934BAEB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B57120-FD73-46A0-85AC-D4A934BAEB1A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8E5FD9AB-CA0D-47D4-AA9A-9D6F0572512F}
+	EndGlobalSection
+EndGlobal

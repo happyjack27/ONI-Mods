@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D8B57120-FD73-46A0-85AC-D4A934BAEB1A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EdgeDetectors</RootNamespace>
+    <AssemblyName>EdgeDetectors</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnity">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnityResonance">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnityResonance.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="baseClasses\UnaryGate.cs" />
+    <Compile Include="baseClasses\UnaryGateConfig.cs" />
+    <Compile Include="baseClasses\UnaryGateRibbon.cs" />
+    <Compile Include="baseClasses\UnaryGateRibbonConfig.cs" />
+    <Compile Include="baseClasses\WireToRibbon.cs" />
+    <Compile Include="baseClasses\WireToRibbonConfig.cs" />
+    <Compile Include="DiodeGate.cs" />
+    <Compile Include="DiodeGateConfig.cs" />
+    <Compile Include="FallingEdgeGate.cs" />
+    <Compile Include="FallingEdgeGateConfig.cs" />
+    <Compile Include="Patches.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RisingEdgeCounter.cs" />
+    <Compile Include="RisingEdgeCounterConfig.cs" />
+    <Compile Include="RisingEdgeGate.cs" />
+    <Compile Include="RisingEdgeGateConfig.cs" />
+    <Compile Include="util\GameStrings.cs" />
+    <Compile Include="util\ListOption.cs" />
+    <Compile Include="util\StringUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="anim\assets\logic_falling\logic_falling_anim.bytes" />
+    <None Include="anim\assets\logic_falling\logic_falling_build.bytes" />
+    <None Include="anim\assets\logic_pulse_counter\logic_pulse_counter_anim.bytes" />
+    <None Include="anim\assets\logic_pulse_counter\logic_pulse_counter_build.bytes" />
+    <None Include="anim\assets\logic_ribbon_to_wire\logic_wire_to_ribbon_anim.bytes" />
+    <None Include="anim\assets\logic_ribbon_to_wire\logic_wire_to_ribbon_build.bytes" />
+    <None Include="anim\assets\logic_ribbon_to_wire\output\logic_generator_random.autosave.scml" />
+    <None Include="anim\assets\logic_ribbon_to_wire\output\logic_generator_random.scml" />
+    <None Include="anim\assets\logic_rising\logic_rising_anim.bytes" />
+    <None Include="anim\assets\logic_rising\logic_rising_build.bytes" />
+    <None Include="anim\assets\logic_unary\logic_unary_anim.bytes" />
+    <None Include="anim\assets\logic_unary\logic_unary_build.bytes" />
+    <None Include="anim\assets\logic_wire_to_ribbon\logic_wire_to_ribbon_anim.bytes" />
+    <None Include="anim\assets\logic_wire_to_ribbon\logic_wire_to_ribbon_build.bytes" />
+    <None Include="mod.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="mod_info.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="anim\assets\logic_falling\logic_falling.png" />
+    <Content Include="anim\assets\logic_pulse_counter\logic_pulse_counter.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\logic_wire_to_ribbon.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\output\light_bloom_0.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\output\light_bloom_1.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\output\light_bloom_2.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\output\panel_0.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\output\place_0.png" />
+    <Content Include="anim\assets\logic_ribbon_to_wire\output\ui_0.png" />
+    <Content Include="anim\assets\logic_rising\logic_rising.png" />
+    <Content Include="anim\assets\logic_unary\logic_unary.png" />
+    <Content Include="anim\assets\logic_wire_to_ribbon\logic_wire_to_ribbon.png" />
+    <Content Include="steam\composite_or_gate.png" />
+    <Content Include="steam\edge_counter2.png" />
+    <Content Include="steam\edge_detectors.png" />
+    <Content Include="steam\mod description.txt" />
+    <Content Include="steam\preview.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "C:\Users\kbaas\Documents\Klei\OxygenNotIncluded\mods\Dev\$(ProjectName)\"
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

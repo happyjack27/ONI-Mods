@@ -1,0 +1,33 @@
+﻿
+
+four control bits:
+
+00 - data
+	00 - no op
+	01 - pop (discard)
+	10 - push
+	11 - replace
+01 - reserved (unary ops?) (shift? rotate?)
+	//increment, decrement, negate, not, push zero, clear, shift, rotate, count...
+	00 - shift
+	01 - rotate
+	10 - increment (only if no carry in connected)
+	11 - push zero
+10 - arithmetic
+	00 - add
+	01 - subtract
+	10 - multiply (put high bits on stack)
+	11 - divide (put modulus on stack)
+11 - logic
+	00 - or
+	01 - and
+	10 - xor
+	11 - xand
+
+four flags:
+	00 - zero
+	01 - carry / borrow out
+	10 - sign
+	11 - stack empty
+	
+	carry / borrow in

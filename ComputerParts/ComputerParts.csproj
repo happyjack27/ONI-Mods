@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{237BBF3C-F691-48C5-B57B-81BEAA05D229}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ComputerParts</RootNamespace>
+    <AssemblyName>ComputerParts</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnity">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnityResonance">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnityResonance.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="baseClasses\Base4x2.cs" />
+    <Compile Include="baseClasses\Base4x2Config.cs" />
+    <Compile Include="baseClasses\Base2x2Config.cs" />
+    <Compile Include="baseClasses\Base2x2.cs" />
+    <Compile Include="Ram8.cs" />
+    <Compile Include="Ram8Config.cs" />
+    <Compile Include="util\ALU_opcodes.cs" />
+    <Compile Include="util\BinaryFormatter.cs" />
+    <Compile Include="util\BinaryUtils.cs" />
+    <Compile Include="Reg4Config.cs" />
+    <Compile Include="Reg4.cs" />
+    <Compile Include="Patches.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="util\GameStrings.cs" />
+    <Compile Include="util\ListOption.cs" />
+    <Compile Include="util\StringUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="anim\assets\4bit_reg\4bit_reg_anim.bytes" />
+    <None Include="anim\assets\4bit_reg\4bit_reg_build.bytes" />
+    <None Include="anim\assets\4x2\8bit.pdn" />
+    <None Include="anim\assets\4x2\8bitui.pdn" />
+    <None Include="anim\assets\4x2\4x2.pdn" />
+    <None Include="anim\assets\4x2\4x2_anim.bytes" />
+    <None Include="anim\assets\4x2\4x2_build.bytes" />
+    <None Include="anim\assets\8bit_stack_alu\8bit.pdn" />
+    <None Include="anim\assets\8bit_stack_alu\8bitui.pdn" />
+    <None Include="anim\assets\8bit_stack_alu\8bit_stack_alu.pdn" />
+    <None Include="anim\assets\8bit_stack_alu\8bit_stack_alu_anim.bytes" />
+    <None Include="anim\assets\8bit_stack_alu\8bit_stack_alu_build.bytes" />
+    <None Include="anim\assets\8bit_instruction_decoder\8bit.pdn" />
+    <None Include="anim\assets\8bit_instruction_decoder\8bitui.pdn" />
+    <None Include="anim\assets\8bit_instruction_decoder\8bit_stack.pdn" />
+    <None Include="anim\assets\8bit_instruction_decoder\8bit_stack_anim.bytes" />
+    <None Include="anim\assets\8bit_instruction_decoder\8bit_stack_build.bytes" />
+    <None Include="anim\assets\8bit_ram_module\8bitui.pdn" />
+    <None Include="anim\assets\8bit_ram_module\8bit_place.pdn" />
+    <None Include="anim\assets\8bit_ram_module\8bit_ram_module.pdn" />
+    <None Include="anim\assets\8bit_ram_module\8bit_ram_module_anim.bytes" />
+    <None Include="anim\assets\8bit_ram_module\8bit_ram_module_build.bytes" />
+    <None Include="anim\assets\2x2base\2x2base_anim.bytes" />
+    <None Include="anim\assets\2x2base\2x2base_build.bytes" />
+    <None Include="mod.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="mod_info.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="anim\assets\4bit_reg\4bit_reg.png" />
+    <Content Include="anim\assets\2x2base\2x2base.png" />
+    <Content Include="anim\assets\8bit_instruction_decoder\8bit_instruction_decoder.png" />
+    <Content Include="anim\assets\8bit_ram_module\8bit_ram_module.png" />
+    <Content Include="anim\assets\4x2\4x2.png" />
+    <Content Include="anim\assets\8bit_stack_alu\8bit_stack_alu.png" />
+    <Content Include="notes\decoder outputs.txt" />
+    <Content Include="notes\instructions.txt" />
+    <Content Include="notes\stack-based-alu.txt" />
+    <Content Include="steam\4regs_unconnected.png" />
+    <Content Include="steam\4regs_with_selectors.png" />
+    <Content Include="steam\mod description.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "$(TargetDir)$(ProjectName).dll" "C:\Users\kbaas\Documents\Klei\OxygenNotIncluded\mods\Dev\$(ProjectName)\"
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,33 @@
+[h1][i]MORE TO COME![/i][/h1]
+
+[list]
+[*]4-bit register
+[/list]
+
+[h1]4-bit register[/h1]
+Stores 4 bits of binary data from a ribbon.
+Has 2 control ports:
+[list]
+[*]Write - Updates the stored value with the value from the input.
+[*]Read - Sends the stored value to the output.
+[/list]
+
+Writes happen before reads, so if both control ports are on, there is no delay.
+The "Read Enable" port is so that multiple registers can share the same output ribbon, but you can choose which one will output to it (e.g. by using a demultiplexer).
+
+Disconnected control ports are treated as "on" (green), so depending on which control ports you leave unconnected, it will operate slightly differenly:
+[list]
+[*]No control ports connected - Just acts as a "diode" (buffer with no delay) for a ribbon.
+[*]Only read control connected - The "Read Enable" gate controls whether the input signal passes through to the output or not.  So it's a one-way signal gate that you can turn on and off.
+[*]Only write control connected - Acts like a D-flop, but for 4 bits of data instead of just one.
+[*]Both connected - Normal: both write-gating and read-gating; a read-gated D-flop.
+[/list]
+
+
+[h1]Planned[/h1]
+[list]
+[*]8-bit addressable memory module (read gated, so you can combine them to add memory)
+[*]16-bit addressable read-only memory module
+[*]8-bit stack-based ALU (16 instructions: 4 stack control, 4 arithmetic, 4 bitwise logic, 4 special)
+[*]8-bit instruction decoder (I already have an instruction set designed that uses the above parts.)
+[/list]

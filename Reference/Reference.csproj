@@ -1,0 +1,500 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{423B68D3-21EB-4B42-9097-ED7931686557}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Reference</RootNamespace>
+    <AssemblyName>Reference</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp-firstpass">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnity">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnity.dll</HintPath>
+    </Reference>
+    <Reference Include="FMODUnityResonance">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnityResonance.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.TextRenderingModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.TextRenderingModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutomationPlus\Alu8Gate.cs" />
+    <Compile Include="AutomationPlus\Alu8GateConfig.cs" />
+    <Compile Include="AutomationPlus\Alu8GateStrings.cs" />
+    <Compile Include="AutomationPlus\AluGate.cs" />
+    <Compile Include="AutomationPlus\AluGateConfig.cs" />
+    <Compile Include="AutomationPlus\AluGateSideScreen.cs" />
+    <Compile Include="AutomationPlus\AluGateStrings.cs" />
+    <Compile Include="AutomationPlus\DelayGateStrings.cs" />
+    <Compile Include="DenseLogic\BitOption.cs" />
+    <Compile Include="DenseLogic\DenseDeMultiplexerConfig.cs" />
+    <Compile Include="DenseLogic\DenseInput.cs" />
+    <Compile Include="DenseLogic\DenseInputConfig.cs" />
+    <Compile Include="DenseLogic\DenseLogicGate.cs" />
+    <Compile Include="DenseLogic\DenseLogicGateConfig.cs" />
+    <Compile Include="DenseLogic\DenseLogicStrings.cs" />
+    <Compile Include="DenseLogic\DenseMultiplexer.cs" />
+    <Compile Include="DenseLogic\DenseMultiplexerConfig.cs" />
+    <Compile Include="DenseLogic\FourBitSelectSideScreen.cs" />
+    <Compile Include="DenseLogic\IConfigurableFourBits.cs" />
+    <Compile Include="DenseLogic\IConfigurableLogicGate.cs" />
+    <Compile Include="DenseLogic\IInlineSelectable.cs" />
+    <Compile Include="DenseLogic\InlineGateSideScreen.cs" />
+    <Compile Include="DenseLogic\InlineLogicGate.cs" />
+    <Compile Include="DenseLogic\InlineLogicGateConfig.cs" />
+    <Compile Include="DenseLogic\LogicData.cs" />
+    <Compile Include="DenseLogic\LogicDataConfig.cs" />
+    <Compile Include="DenseLogic\LogicGate.cs" />
+    <Compile Include="DenseLogic\LogicGateNandConfig.cs" />
+    <Compile Include="DenseLogic\LogicGateNorConfig.cs" />
+    <Compile Include="DenseLogic\LogicGateSelectSideScreen.cs" />
+    <Compile Include="DenseLogic\LogicGateType.cs" />
+    <Compile Include="DenseLogic\LogicGateXnorConfig.cs" />
+    <Compile Include="DenseLogic\LogicSevenSegment.cs" />
+    <Compile Include="DenseLogic\LogicSevenSegmentConfig.cs" />
+    <Compile Include="DenseLogic\ONI_DenseLogicPatches.cs" />
+    <Compile Include="DenseLogic\Properties\AssemblyInfo.cs" />
+    <Compile Include="DenseLogic\RemapperSideScreen.cs" />
+    <Compile Include="DenseLogic\SignalRemapper.cs" />
+    <Compile Include="DenseLogic\SignalRemapperConfig.cs" />
+    <Compile Include="klei\LogicEventHandler.cs" />
+    <Compile Include="klei\LogicEventSender.cs" />
+    <Compile Include="klei\LogicGateVisualizer.cs" />
+    <Compile Include="klei\LogicPorts.cs" />
+    <Compile Include="klei\LogicValueChanged.cs" />
+    <Compile Include="klei\LogicVisualizer.cs" />
+    <Compile Include="klei\LogicWire.cs" />
+    <Compile Include="klei\LogicWireConfig.cs" />
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.7.1.AssemblyAttributes.cs" />
+    <Compile Include="old_way\Logic.cs" />
+    <Compile Include="old_way\LogicBase.cs" />
+    <Compile Include="old_way\LogicBaseConfig.cs" />
+    <Compile Include="old_way\LogicGate2.cs" />
+    <Compile Include="old_way\LogicGate3AndConfig.cs" />
+    <Compile Include="old_way\LogicGate3AndStrings.cs" />
+    <Compile Include="old_way\LogicGateBase2.cs" />
+    <Compile Include="old_way\LogicGateBaseConfig2.cs" />
+    <Compile Include="old_way\LogicGateDiode.cs" />
+    <Compile Include="old_way\LogicGateDiodeConfig.cs" />
+    <Compile Include="old_way\LogicGateDiodeStrings.cs" />
+    <Compile Include="Patches.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="AutomationPlus\anim\4bit_alu\2\4bitui.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\2\4bit_ALU_anim.bytes" />
+    <None Include="AutomationPlus\anim\4bit_alu\2\4bit_ALU_build.bytes" />
+    <None Include="AutomationPlus\anim\4bit_alu\4bitui.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\4bit_alu_anim.bytes" />
+    <None Include="AutomationPlus\anim\4bit_alu\4bit_alu_build.bytes" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_add_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_bits_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_div_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_exp_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_min_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_mod_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_mul_0.pdn" />
+    <None Include="AutomationPlus\anim\4bit_alu\operators\op_sub_0.pdn" />
+    <None Include="AutomationPlus\anim\8bit_alu\8bit.pdn" />
+    <None Include="AutomationPlus\anim\8bit_alu\8bitui.pdn" />
+    <None Include="AutomationPlus\anim\8bit_alu\8bit_alu_anim.bytes" />
+    <None Include="AutomationPlus\anim\8bit_alu\8bit_alu_build.bytes" />
+    <None Include="AutomationPlus\anim\8bit_alu\8bit_place.pdn" />
+    <None Include="DenseLogic\anim\test\dense_DEMUX - Copy\dense_DEMUX_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_DEMUX - Copy\dense_DEMUX_build.bytes" />
+    <None Include="DenseLogic\anim\test\dense_DEMUX\dense_DEMUX_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_DEMUX\dense_DEMUX_build.bytes" />
+    <None Include="DenseLogic\anim\test\dense_INLINE\dense_INLINE_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_INLINE\dense_INLINE_build.bytes" />
+    <None Include="DenseLogic\anim\test\dense_INPUT\dense_INPUT_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_INPUT\dense_INPUT_build.bytes" />
+    <None Include="DenseLogic\anim\test\dense_MULTI\dense_MULTI_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_MULTI\dense_MULTI_build.bytes" />
+    <None Include="DenseLogic\anim\test\dense_MUX\dense_MUX_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_MUX\dense_MUX_build.bytes" />
+    <None Include="DenseLogic\anim\test\dense_SWITCH\dense_SWITCH_anim.bytes" />
+    <None Include="DenseLogic\anim\test\dense_SWITCH\dense_SWITCH_build.bytes" />
+    <None Include="DenseLogic\anim\test\logic_DLATCH\logic_dlatch_anim.bytes" />
+    <None Include="DenseLogic\anim\test\logic_DLATCH\logic_dlatch_build.bytes" />
+    <None Include="DenseLogic\anim\test\logic_NAND\logic_NAND_anim.bytes" />
+    <None Include="DenseLogic\anim\test\logic_NAND\logic_NAND_build.bytes" />
+    <None Include="DenseLogic\anim\test\logic_NOR\logic_NOR_anim.bytes" />
+    <None Include="DenseLogic\anim\test\logic_NOR\logic_NOR_build.bytes" />
+    <None Include="DenseLogic\anim\test\logic_SEVEN\logic_counter_anim.bytes" />
+    <None Include="DenseLogic\anim\test\logic_SEVEN\logic_counter_build.bytes" />
+    <None Include="DenseLogic\anim\test\logic_XNOR\logic_XNOR_anim.bytes" />
+    <None Include="DenseLogic\anim\test\logic_XNOR\logic_XNOR_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_DEMUX\dense_DEMUX_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_DEMUX\dense_DEMUX_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_INLINE\dense_INLINE_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_INLINE\dense_INLINE_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_INPUT\dense_INPUT_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_INPUT\dense_INPUT_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_MULTI\dense_MULTI_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_MULTI\dense_MULTI_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_MUX\dense_MUX_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_MUX\dense_MUX_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_SWITCH\dense_SWITCH_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_SWITCH\dense_SWITCH_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_DLATCH\logic_dlatch_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_DLATCH\logic_dlatch_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_NAND\logic_NAND_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_NAND\logic_NAND_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_NOR\logic_NOR_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_NOR\logic_NOR_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_SEVEN\logic_counter_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_SEVEN\logic_counter_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_XNOR\logic_XNOR_anim.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_XNOR\logic_XNOR_build.bytes" />
+    <None Include="DenseLogic\archived_versions\vanilla_469300\mod_info.yaml" />
+    <None Include="DenseLogic\mod.yaml" />
+    <None Include="DenseLogic\mod_info.yaml" />
+    <None Include="DenseLogic\obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="DenseLogic\ONI-DenseLogic.csproj" />
+    <None Include="DenseLogic\packages.config" />
+    <None Include="DenseLogic\spriter\and_dense\dense_AND.autosave.scml" />
+    <None Include="DenseLogic\spriter\and_dense\dense_AND.scml" />
+    <None Include="DenseLogic\spriter\demux_dense\dense_DEMUX.autosave.scml" />
+    <None Include="DenseLogic\spriter\demux_dense\dense_DEMUX.scml" />
+    <None Include="DenseLogic\spriter\dlatch\logic_dlatch.scml" />
+    <None Include="DenseLogic\spriter\inline\dense_INLINE.autosave.scml" />
+    <None Include="DenseLogic\spriter\inline\dense_INLINE.scml" />
+    <None Include="DenseLogic\spriter\input_dense\dense_input.scml" />
+    <None Include="DenseLogic\spriter\multi_dense\dense_MULTI.autosave.scml" />
+    <None Include="DenseLogic\spriter\multi_dense\dense_MULTI.scml" />
+    <None Include="DenseLogic\spriter\mux_dense\dense_MUX.autosave.scml" />
+    <None Include="DenseLogic\spriter\mux_dense\dense_MUX.scml" />
+    <None Include="DenseLogic\spriter\nand\logic_NAND.scml" />
+    <None Include="DenseLogic\spriter\nand_dense\dense_NAND.scml" />
+    <None Include="DenseLogic\spriter\nor\logic_NOR.autosave.scml" />
+    <None Include="DenseLogic\spriter\nor\logic_NOR.scml" />
+    <None Include="DenseLogic\spriter\nor_dense\dense_NOR.scml" />
+    <None Include="DenseLogic\spriter\not_dense\dense_NOT.autosave.scml" />
+    <None Include="DenseLogic\spriter\not_dense\dense_NOT.scml" />
+    <None Include="DenseLogic\spriter\or_dense\dense_OR.scml" />
+    <None Include="DenseLogic\spriter\switch_dense\dense_SWITCH.scml" />
+    <None Include="DenseLogic\spriter\xnor\logic_XNOR.scml" />
+    <None Include="DenseLogic\spriter\xnor_dense\dense_XNOR.scml" />
+    <None Include="DenseLogic\spriter\xor_dense\dense_XOR.scml" />
+    <None Include="mod.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="mod_info.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="DenseLogic\bin\Debug\" />
+    <Folder Include="DenseLogic\obj\Debug\TempPE\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AutomationPlus\anim\4bit_alu\2\4bit_ALU.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\4bit_alu.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\operators\op_add.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\operators\op_bits.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\operators\op_div.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\operators\op_exp.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\operators\op_minus.png" />
+    <Content Include="AutomationPlus\anim\4bit_alu\operators\op_mod.png" />
+    <Content Include="AutomationPlus\anim\8bit_alu\8bit_alu.png" />
+    <Content Include="DenseLogic\anim\test\dense_DEMUX - Copy\dense_DEMUX.png" />
+    <Content Include="DenseLogic\anim\test\dense_DEMUX\dense_DEMUX.png" />
+    <Content Include="DenseLogic\anim\test\dense_INLINE\dense_INLINE.png" />
+    <Content Include="DenseLogic\anim\test\dense_INPUT\dense_INPUT.png" />
+    <Content Include="DenseLogic\anim\test\dense_MULTI\dense_MULTI.png" />
+    <Content Include="DenseLogic\anim\test\dense_MUX\dense_MUX.png" />
+    <Content Include="DenseLogic\anim\test\dense_SWITCH\dense_SWITCH.png" />
+    <Content Include="DenseLogic\anim\test\logic_DLATCH\logic_dlatch.png" />
+    <Content Include="DenseLogic\anim\test\logic_NAND\logic_NAND.png" />
+    <Content Include="DenseLogic\anim\test\logic_NOR\logic_NOR.png" />
+    <Content Include="DenseLogic\anim\test\logic_SEVEN\logic_counter_0.png" />
+    <Content Include="DenseLogic\anim\test\logic_XNOR\logic_XNOR.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_DEMUX\dense_DEMUX.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_INLINE\dense_INLINE.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_INPUT\dense_INPUT.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_MULTI\dense_MULTI.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_MUX\dense_MUX.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\dense_SWITCH\dense_SWITCH.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_DLATCH\logic_dlatch.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_NAND\logic_NAND.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_NOR\logic_NOR.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_SEVEN\logic_counter_0.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\anim\test\logic_XNOR\logic_XNOR.png" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\ONI-DenseLogicMerged.dll" />
+    <Content Include="DenseLogic\archived_versions\vanilla_469300\preview.png" />
+    <Content Include="DenseLogic\spriter\and_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\and_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\and_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\and_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\and_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\and_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\and_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\demux_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\dlatch\outline_0.png" />
+    <Content Include="DenseLogic\spriter\dlatch\panel_0.png" />
+    <Content Include="DenseLogic\spriter\dlatch\place_0.png" />
+    <Content Include="DenseLogic\spriter\dlatch\progressbar_0.png" />
+    <Content Include="DenseLogic\spriter\dlatch\progressbar_1.png" />
+    <Content Include="DenseLogic\spriter\dlatch\progressbar_curve_0.png" />
+    <Content Include="DenseLogic\spriter\dlatch\progressbar_curve_1.png" />
+    <Content Include="DenseLogic\spriter\dlatch\progressbar_curve_2.png" />
+    <Content Include="DenseLogic\spriter\dlatch\progressbar_curve_3.png" />
+    <Content Include="DenseLogic\spriter\dlatch\ui_0.png" />
+    <Content Include="DenseLogic\spriter\inline\and_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_a1_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_a2_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_a3_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_a4_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_b1_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_b2_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_b3_0.png" />
+    <Content Include="DenseLogic\spriter\inline\in_b4_0.png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_0_0_0.png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_0_1_0.png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_0_2_0.png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_1_0_0.png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_1_1_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_1_2_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_2_0_0.png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_2_1_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_2_2_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_3_0_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_3_1_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\light_bloom_3_2_0 .png" />
+    <Content Include="DenseLogic\spriter\inline\nand_0.png" />
+    <Content Include="DenseLogic\spriter\inline\nor_0.png" />
+    <Content Include="DenseLogic\spriter\inline\or_0.png" />
+    <Content Include="DenseLogic\spriter\inline\out_1_0.png" />
+    <Content Include="DenseLogic\spriter\inline\out_2_0.png" />
+    <Content Include="DenseLogic\spriter\inline\out_3_0.png" />
+    <Content Include="DenseLogic\spriter\inline\out_4_0.png" />
+    <Content Include="DenseLogic\spriter\inline\panel_0.png" />
+    <Content Include="DenseLogic\spriter\inline\place_0.png" />
+    <Content Include="DenseLogic\spriter\inline\ui_0.png" />
+    <Content Include="DenseLogic\spriter\inline\xnor_0.png" />
+    <Content Include="DenseLogic\spriter\inline\xor_0.png" />
+    <Content Include="DenseLogic\spriter\input_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\input_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\input_dense\slider_0.png" />
+    <Content Include="DenseLogic\spriter\input_dense\slider_1.png" />
+    <Content Include="DenseLogic\spriter\input_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\and_gate_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_a1_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_a2_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_a3_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_a4_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_b1_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_b2_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_b3_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\in_b4_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_0_0_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_0_1_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_0_2_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_0_3_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_1_0_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_1_1_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_1_2_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_1_3_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_2_0_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_2_1_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_2_2_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\light_bloom_2_3_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\nand_gate_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\nor_gate_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\or_gate_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\out_1_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\out_2_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\out_3_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\out_4_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\ports_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\xnor_gate_0.png" />
+    <Content Include="DenseLogic\spriter\multi_dense\xor_gate_0.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\mux_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\nand\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\nand\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\nand\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\nand\panel_0.png" />
+    <Content Include="DenseLogic\spriter\nand\place_0.png" />
+    <Content Include="DenseLogic\spriter\nand\ui_0.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\nand_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\nor\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\nor\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\nor\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\nor\panel_0.png" />
+    <Content Include="DenseLogic\spriter\nor\place_0.png" />
+    <Content Include="DenseLogic\spriter\nor\ui_0.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\nor_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\not_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\not_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\not_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\not_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\not_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\not_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\not_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\or_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\or_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\or_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\or_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\or_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\or_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\or_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a1_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a1_2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a1_3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a1_4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a2_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a2_2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a2_3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a2_4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a3_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a3_2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a3_3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a3_4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a4_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a4_2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a4_3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\a4_4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\b1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\b2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\b3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\b4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\c1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\c2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\c3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\c4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\in1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\in2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\in3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\in4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_0_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_0_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_1_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_1_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_2_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_2_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_3_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_3_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_4_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_4_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_5_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_5_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_6_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_6_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_7_0_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_bloom_7_1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\light_off_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\out1_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\out2_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\out3_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\out4_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\switch_0.png" />
+    <Content Include="DenseLogic\spriter\switch_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\xnor\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\xnor\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\xnor\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\xnor\panel_0.png" />
+    <Content Include="DenseLogic\spriter\xnor\place_0.png" />
+    <Content Include="DenseLogic\spriter\xnor\ui_0.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\xnor_dense\ui_0.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\light_bloom_0.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\light_bloom_1.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\light_bloom_2.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\light_bloom_3.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\panel_0.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\place_0.png" />
+    <Content Include="DenseLogic\spriter\xor_dense\ui_0.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

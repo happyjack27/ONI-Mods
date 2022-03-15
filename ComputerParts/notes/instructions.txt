@@ -1,0 +1,59 @@
+﻿
+8-bit instruction set
+=======================
+16 instructions, 2 operands
+bit 1&2: instruction category
+bit 3&4: instruction
+bit 5&6: first operand (which stack)
+bit 7&8: second operand (which stack)
+
+00 - data handling
+----------
+bit 1: pop
+bit 2: push
+	00 load a,b
+	01 pop a (extra operand ignored) (if stack empty, is zero)
+	10 push a,b
+	11 mov a,b
+
+pop conditional?
+
+01 - flow control, first operand is condition
+----------
+bit 1: pop call stack
+bit 2: push call stack
+bit 3: condition, carry or zero flag
+bit 4: condition, is set or is not set
+	00 store a,b
+	01
+		00 return (extra operand ignored)
+		01 load immediate a (next instruction is value)
+		10 call unconditional a
+		11 jump unconditional a
+	10 call conditional a
+	11 jump conditional a
+
+condition operand:
+----------
+		00 gt
+		01 lt
+		10 eq
+		11 neq
+
+10 - arithmetic (if second op and first op are the same, stack is popped for value)
+----------
+bit 1: add or multiply
+bit 2: inverse operation
+	00 add
+	01 sub
+	10 mul (high byte is pushed, carry flag signifies high byte is non zero)
+	11 div (modulus is pushed)
+
+11 - logic (if second op and first op are equal, stack is popped for value) (will set the zero flag)
+----------
+bit 1: or or and
+bit 2: exclusive version
+	00 bitwise or
+	01 bitwise xor (xor with -1 for a not)
+	10 bitwise and
+	11 bitwise xnor (11 or 00) (xnor with 0 for a not)

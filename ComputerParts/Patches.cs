@@ -49,9 +49,13 @@ namespace KBComputing
                 StringUtils.AddStringTypes(typeof(TMuxConfig));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, TMuxConfig.ID);
 
-                StringUtils.AddBuildingStrings(Ram8Config.ID, Ram8Config.NAME, Ram8Config.DESC, Ram8Config.EFFECT);
-                StringUtils.AddStringTypes(typeof(Ram8Config));
-                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Ram8Config.ID);
+                StringUtils.AddBuildingStrings(RisingEdgeCounterConfig.ID, RisingEdgeCounterConfig.NAME, RisingEdgeCounterConfig.DESC, RisingEdgeCounterConfig.EFFECT);
+                StringUtils.AddStringTypes(typeof(RisingEdgeCounterConfig));
+                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, RisingEdgeCounterConfig.ID);
+
+                //StringUtils.AddBuildingStrings(Ram8Config.ID, Ram8Config.NAME, Ram8Config.DESC, Ram8Config.EFFECT);
+                //StringUtils.AddStringTypes(typeof(Ram8Config));
+                //ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Ram8Config.ID);
 
                 /*
                 StringUtils.AddBuildingStrings(Base2x2EveryTickConfig.ID, Base2x2EveryTickConfig.NAME, Base2x2EveryTickConfig.DESC, Base2x2EveryTickConfig.EFFECT);
@@ -73,7 +77,8 @@ namespace KBComputing
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Reg4Config.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TDeMuxConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TMuxConfig.ID);
-                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Ram8Config.ID);
+                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(RisingEdgeCounterConfig.ID);
+                    //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Ram8Config.ID);
                     //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2EveryTickConfig.ID);
                     //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2OnChangeConfig.ID);
                     //Base2x2OnChangeConfig

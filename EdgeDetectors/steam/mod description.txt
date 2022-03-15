@@ -1,4 +1,5 @@
 [i][b]Note:[/b] The mod has been renamed in the mods view from "Some Logic Gates" to "Edge Detectors and Diode"[/i]
+[i][b]Note:[/b] The rising edge counter is now just an edge counter (counts both rising and falling).[/i]
 
 [list]
 [*]Falling Edge Detector
@@ -13,8 +14,8 @@ Sends a green signal for one tick when the input goes from red to green.
 [h1]Falling Edge Detector[/h1]
 Sends a green signal for one tick when the input goes from green to red.
 
-[h1]Rising Edge Counter [i](NEW!)[/i][/h1]
-Counts the number of times a rising edge is observed and outputs that in binary to a ribbon.
+[h1]Edge Counter [i](NEW!)[/i][/h1]
+Counts the number of times the input signal changes and outputs that in binary to a ribbon.
 
 [h1]Diode[/h1]
 Copies input to output.
@@ -28,3 +29,5 @@ A OR B = NOT (NOT A AND NOT B)
 
 
 My first mod ever. :-) More to come.
+
+[i]Source code available [url=https://github.com/happyjack27/ONI-Mods] here [/url].[/i]

@@ -2,6 +2,9 @@
 
 [list]
 [*]4-bit register
+[*]Edge counter (use as a clock)
+[*]8-bit multiplexer
+[*]8-bit de-multiplexer
 [/list]
 
 [h1]4-bit register[/h1]
@@ -23,11 +26,30 @@ Disconnected control ports are treated as "on" (green), so depending on which co
 [*]Both connected - Normal: both write-gating and read-gating; a read-gated D-flop.
 [/list]
 
+[h1]Edge Counter [i](NEW!)[/i][/h1]
+Counts the number of times the input signal changes and outputs that in binary to a ribbon.
 
-[h1]Planned[/h1]
+[h1]Mux and DeMux [i](NEW!)[/i][/h1]
+Connect the output port of the Mux to the input port of the DeMux.
+Then attach the output of the Edge Counter to the control ports on each.
+The Mux will send one bit per tick of the counter to the DeMux
+In 8 ticks of the counter, the DeMux will refresh its output, and it will match the input of the Mux.
+The DeMux refreshes when the highest bit on the Edge Counter output changes.
+
+You can string them together to e.g. send 32-bits at a time over a ribbon.
+
+
+[h1]Planned (and being worked on)[/h1]
 [list]
 [*]8-bit addressable memory module (read gated, so you can combine them to add memory)
 [*]16-bit addressable read-only memory module
 [*]8-bit stack-based ALU (16 instructions: 4 stack control, 4 arithmetic, 4 bitwise logic, 4 special)
 [*]8-bit instruction decoder (I already have an instruction set designed that uses the above parts.)
 [/list]
+
+With these additional parts, you should be able to build a fully programmable computer in ONI.
+
+(The stack-based ALU can be used as an instruction sequencer and call stack, as a register, as an ALU, etc.  The instruction decoder takes an 8-bit instruction and converts it into two sequential sets of 16 control bits (which determine read channels, write channels, predication, stack pushes and pops, etc.  The ROM is where you write the program.  I/O with sensors and actuators I'm imagining being memory-mapped, statically.)
+
+
+[i]Source code available [url=https://github.com/happyjack27/ONI-Mods] here [/url].[/i]

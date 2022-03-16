@@ -5,6 +5,7 @@
 [*]Edge counter (use as a clock)
 [*]8-bit multiplexer
 [*]8-bit de-multiplexer
+[*]8-bit addressable memory module (read gated, so you can combine them to add memory)
 [/list]
 
 [h1]4-bit register[/h1]
@@ -38,10 +39,20 @@ The DeMux refreshes when the highest bit on the Edge Counter output changes.
 
 You can string them together to e.g. send 32-bits at a time over a ribbon.
 
+[h1]8-bit addressable memory module [i](NEW!)[/i][/h1]
+Connect data in and address in to the left side, data out to the right side.
+Connect a control ribbon to the R / W port.
+[list]
+[*]The first bit on the control ribbon is the "read enable" signal; it copies the stored value to the output.
+[*]The second bit on the control ribbon is the "write enable" signal; it copies the input to the stored value.
+[*]The third bit on the control ribbon is ignored.
+[*]The fourth bit on the control ribbon is ignored.
+[/list]
+
+The write enable and read enable bits allow multiple modules to share the same input and output bus, without interfering with each other.
 
 [h1]Planned (and being worked on)[/h1]
 [list]
-[*]8-bit addressable memory module (read gated, so you can combine them to add memory)
 [*]16-bit addressable read-only memory module
 [*]8-bit stack-based ALU (16 instructions: 4 stack control, 4 arithmetic, 4 bitwise logic, 4 special)
 [*]8-bit instruction decoder (I already have an instruction set designed that uses the above parts.)

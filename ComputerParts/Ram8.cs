@@ -13,36 +13,70 @@ namespace KBComputing
     [SerializationConfig(MemberSerialization.OptIn)]
     class Ram8 : baseClasses.Base4x2
     {
+
         [Serialize]
-        public int[] Memory = new int[256];
-        public override void LogicTick()
+        public byte[] Memory = new byte[]
         {
-            UpdateValues();
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+        };
+
+        public override bool UpdateValues()
+        {
+            ReadValues();
+            
             int newOut = 0;
 
-            int dataIn  = PortValue[0][0] << 4 | PortValue[0][1];
-            int address = PortValue[0][2] << 4 | PortValue[0][3];
-            int dataOut = PortValue[1][0] << 4 | PortValue[1][1];
-            int operation = PortValue[1][3];
+            int dataIn  = (PortValue00 << 4 | PortValue01) & 0xFF;
+            int address = (PortValue02 << 4 | PortValue03) & 0xFF;
+            int operation = PortValue13;
 
+            
             //write bit set
             if ((operation & 0x02) > 0)
             {
-                Memory[address] = dataIn;
+                Memory[address] = (byte)(dataIn & 0xFF);
             }
             //read bit set
             if ((operation & 0x01) > 0)
             {
-                newOut = Memory[address];
+                newOut = Memory[address] & 0xFF;
             }
 
-            if (newOut != dataOut)
+            int newOut0 = (newOut >> 4) & 0x0F;
+            int newOut1 = newOut & 0x0F;
+
+            if (newOut0 != PortValue10)
             {
-                dataOut = newOut;
-                this.GetComponent<LogicPorts>().SendSignal(Ram8Config.PORT_ID[1][0], dataOut >> 4 & 0b1111);
-                this.GetComponent<LogicPorts>().SendSignal(Ram8Config.PORT_ID[1][1], dataOut & 0b1111);
+                PortValue10 = newOut0;
+                this.GetComponent<LogicPorts>().SendSignal(Ram8Config.PORT_ID10, PortValue10);
             }
-            UpdateVisuals();
+            
+            if (newOut1 != PortValue11)
+            {
+                PortValue11 = newOut1;
+                this.GetComponent<LogicPorts>().SendSignal(Ram8Config.PORT_ID11, PortValue11);
+            }
+            
+            return true;
         }
     }
 }

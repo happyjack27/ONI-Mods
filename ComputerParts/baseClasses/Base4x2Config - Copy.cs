@@ -14,29 +14,34 @@ namespace KBComputing.baseClasses
         public static LocString DESC = (LocString)"Generic";
         public static LocString EFFECT = DESC;
 
-        //public static string[][] LOGIC_PORT = new string[][] {
-        //  new string[] {
-        public static string LOGIC_PORT00 = "Input Port1";
-        public static string LOGIC_PORT01 = "Input Port2";
-        public static string LOGIC_PORT02 = "Input Port3";
-        public static string LOGIC_PORT03 = "Input Port4";
-        //},
-        //new string[] {
-        public static string LOGIC_PORT10 = "Output Port1";
-        public static string LOGIC_PORT11 = "Output Port2";
-        public static string LOGIC_PORT12 = "Not a port";
-        public static string LOGIC_PORT13 = "Control Port";
-        //},
-        //};
-        public static readonly HashedString PORT_ID00 = new HashedString(LOGIC_PORT00);
-        public static readonly HashedString PORT_ID01 = new HashedString(LOGIC_PORT01);
-        public static readonly HashedString PORT_ID02 = new HashedString(LOGIC_PORT02);
-        public static readonly HashedString PORT_ID03 = new HashedString(LOGIC_PORT03);
+        public static string[][] LOGIC_PORT = new string[][] {
+            new string[] {
+                "Input Port1",
+                "Input Port2",
+                "Input Port3",
+                "Input Port4",
+            },
+            new string[] {
+                "Output Port1",
+                "Output Port2",
+                "Not a port",
+                "Control Port",
+            },
+        };
+        public static readonly HashedString[][] PORT_ID;
 
-        public static readonly HashedString PORT_ID10 = new HashedString(LOGIC_PORT10);
-        public static readonly HashedString PORT_ID11 = new HashedString(LOGIC_PORT11);
-        public static readonly HashedString PORT_ID12 = new HashedString(LOGIC_PORT12);
-        public static readonly HashedString PORT_ID13 = new HashedString(LOGIC_PORT13);
+        static Base4x2Config()
+        {
+            PORT_ID = new HashedString[2][];
+            for( int i = 0; i < 2; i++)
+            {
+                PORT_ID[i] = new HashedString[4];
+                for (int j = 0; j < 4; j++)
+                {
+                    PORT_ID[i][j] = new HashedString(LOGIC_PORT[i][j]);
+                }
+            }
+        }
 
         protected BuildingDef CreateBuildingDef(
             string ID,
@@ -70,29 +75,29 @@ namespace KBComputing.baseClasses
             LogicGateBase.uiSrcData = Assets.instance.logicModeUIData;
             buildingDef.LogicInputPorts = new List<LogicPorts.Port>() {
                 new LogicPorts.Port(
-                    PORT_ID00,
+                    PORT_ID[0][0],
                     new CellOffset(0, 3),
-                    (string)LOGIC_PORT00,
+                    (string)LOGIC_PORT[0][0],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_INACTIVE,
-                    false,
+                    true,
                     LogicPortSpriteType.RibbonInput,
                     true
                     ),
                 new LogicPorts.Port(
-                    PORT_ID01,
+                    PORT_ID[0][1],
                     new CellOffset(0, 2),
-                    (string)LOGIC_PORT01,
+                    (string)LOGIC_PORT[0][1],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_INACTIVE,
-                    false,
+                    true,
                     LogicPortSpriteType.RibbonInput,
                     true
                     ),
                 new LogicPorts.Port(
-                    PORT_ID02,
+                    PORT_ID[0][2],
                     new CellOffset(0, 1),
-                    (string)LOGIC_PORT02,
+                    (string)LOGIC_PORT[0][2],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_INACTIVE,
                     true,
@@ -100,9 +105,9 @@ namespace KBComputing.baseClasses
                     true
                     ),
                 new LogicPorts.Port(
-                    PORT_ID03,
+                    PORT_ID[0][3],
                     new CellOffset(0, 0),
-                    (string)LOGIC_PORT03,
+                    (string)LOGIC_PORT[0][3],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_INACTIVE,
                     true,
@@ -110,9 +115,9 @@ namespace KBComputing.baseClasses
                     true
                     ),
                 new LogicPorts.Port(
-                    PORT_ID13,
+                    PORT_ID[1][3],
                     new CellOffset(1, 0),
-                    (string)LOGIC_PORT13,
+                    (string)LOGIC_PORT[1][3],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_INACTIVE,
                     true,
@@ -122,22 +127,22 @@ namespace KBComputing.baseClasses
             };
             buildingDef.LogicOutputPorts = new List<LogicPorts.Port>() {
                 new LogicPorts.Port(
-                    PORT_ID10,
+                    PORT_ID[1][0],
                     new CellOffset(1, 3),
-                    (string)LOGIC_PORT10,
+                    (string)LOGIC_PORT[1][0],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_INACTIVE,
-                    false,
+                    true,
                     LogicPortSpriteType.RibbonOutput,
                     true
                     ),
                 new LogicPorts.Port(
-                    PORT_ID11,
+                    PORT_ID[1][1],
                     new CellOffset(1, 2),
-                    (string)LOGIC_PORT11,
+                    (string)LOGIC_PORT[1][1],
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_INACTIVE,
-                    false,
+                    true,
                     LogicPortSpriteType.RibbonOutput,
                     true
                     ),

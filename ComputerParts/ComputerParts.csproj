@@ -72,9 +72,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="baseClasses\Base4x2.cs" />
     <Compile Include="baseClasses\BaseLogicOnChange.cs" />
     <Compile Include="baseClasses\Base2x2OnChangeConfig.cs" />
-    <Compile Include="baseClasses\Base4x2.cs" />
     <Compile Include="baseClasses\Base4x2Config.cs" />
     <Compile Include="baseClasses\Base2x2Config.cs" />
     <Compile Include="baseClasses\Base2x2.cs" />

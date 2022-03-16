@@ -30,8 +30,6 @@ Operations are split into 4 categories:
 	11 - bitwise logic
 Each category has 4 operations.
 
-Note: multiply and divide push TWO values onto the stack.
-
 The only operations that read from data-in are:
 	0010 - push
 	0011 - replace
@@ -46,9 +44,12 @@ Arithmetic and bitwise logic operations are performebed by the following sequenc
 2. pop number for left-hand side of operation
 3. perform operation
 4. push result of operation (also sent to data out)
+Note:
+	Multiply and divide push TWO values onto the stack.
+	Only the last value pushed onto the stack is sent to data out.
+	To get the other value, pop the stack.
 5. set status flags
 
-Note: the bottom of the stack is always the right side of an operation.
 
 There are four status flags, all available on the status flags output ribbon:
 	0001 - zero
@@ -56,7 +57,8 @@ There are four status flags, all available on the status flags output ribbon:
 	0100 - carry / borrow / overflow
 	1000 - stack fault
 
-The stack can only hold up to 256 values.  Pushing the stack when its full or poping it when it's empty will set the stack fault flag.
+The stack can only hold up to 256 values.  (I had to set a limit, and that seemed reasonable.)
+Pushing the stack when its full or poping it when it's empty will set the stack fault flag. (And the push or pop will fail.)
 
 
 Operation List (OpCodes)

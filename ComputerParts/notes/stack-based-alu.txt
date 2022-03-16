@@ -1,29 +1,62 @@
 ﻿
+Stack-Based Arithmetic and Logic Unit (8-bit)
+=============================================
 
 The stack-based ALU is a more powerfull form of an Arithmetic and Logic Unit (ALU) that can also be used as a register or an instruction sequencer.
 
 See: evaluating a postfix expression using a stack.
 The bottom of the stack is always the right side of an operation.
-Arithmetic and bitwise logic operations pop 2 values from the stack, performs the operation (with the value that was on the bottom of the stack being on the right side), and then pushes the result to the stack.
+Arithmetic and bitwise logic operations:
+1. pop right-hand side
+2. pop left-hand side 
+3. perform operation
+4. push result of operation (also sent to data out)
+5. set status flags
 
-Inputs:
+There are four status flags:
+	00 - zero
+	01 - sign (1 if negative, 0 if positive)
+	01 - carry / borrow / overflow
+	11 - stack fault
+
+The stack can only hold up to 256 values.  Pushing the stack when its full or poping it when it's empty will set the stack fault flag.
+
+Ribbon Inputs:
 	data in low
 	data in high
 	operation
 
-Ouputs:
+Ribbon Ouputs:
 	data out low
 	data out high
 	status flags
 
-OpCodes:
+Operations are split into 4 categories: 
+	00 - data
+	01 - special
+	10 - arithmetic
+	11 - bitwise logic
+Each category has 4 operations.
 
+Note: multiply and divide push TWO values onto the stack.
+
+The only operations that read from data in are:
+	0010 - push
+	0011 - replace
+	0110 - queue (put on top of stack)
+
+The rest get their inputs from the stack.
+
+The bottom of the stack is always available on data out.
+
+Operations (OpCodes)
+===================
 00 - data
 	0000 - no operation
 	0001 - pop (discard)
 	0010 - push
 	0011 - replace
-01 - other
+01 - special
 	0100 - pop and shift (sign determines direction)
 	0101 - increment
 	0110 - queue (put on top of stack)
@@ -43,10 +76,3 @@ How to do other operations with multiple steps:
 	to negate (take additive inverse): push 0, push value, subtract
 	to not (bitwise inverse): push 0, xnor.
 	to push a 1: push 0, increment
-
-The bottom of the stack is always available on data out.
-There are four status flags:
-	00 - zero
-	01 - sign
-	01 - carry / borrow out
-	11 - stack empty

@@ -1,33 +1,52 @@
 ﻿
 
-four control bits:
+The stack-based ALU is a more powerfull form of an Arithmetic and Logic Unit (ALU) that can also be used as a register or an instruction sequencer.
+
+See: evaluating a postfix expression using a stack.
+The bottom of the stack is always the right side of an operation.
+Arithmetic and bitwise logic operations pop 2 values from the stack, performs the operation (with the value that was on the bottom of the stack being on the right side), and then pushes the result to the stack.
+
+Inputs:
+	data in low
+	data in high
+	operation
+
+Ouputs:
+	data out low
+	data out high
+	status flags
+
+OpCodes:
 
 00 - data
-	00 - no op
-	01 - pop (discard)
-	10 - push
-	11 - replace
-01 - reserved (unary ops?) (shift? rotate?)
-	//increment, decrement, negate, not, push zero, clear, shift, rotate, count...
-	00 - shift
-	01 - rotate
-	10 - increment (only if no carry in connected)
-	11 - push zero
+	0000 - no operation
+	0001 - pop (discard)
+	0010 - push
+	0011 - replace
+01 - other
+	0100 - pop and shift (sign determines direction)
+	0101 - increment
+	0110 - queue (put on top of stack)
+	0111 - push 0
 10 - arithmetic
-	00 - add
-	01 - subtract
-	10 - multiply (put high bits on stack)
-	11 - divide (put modulus on stack)
-11 - logic
-	00 - or
-	01 - and
-	10 - xor
-	11 - xand
+	1000 - pop and add
+	1001 - pop and subtract
+	1010 - pop and multiply (put high bits on stack)
+	1011 - pop and divide (put modulus on stack)
+11 - bitwise logic
+	1100 - pop and or
+	1101 - pop and and
+	1110 - pop and xor
+	1111 - pop and xnor
 
-four flags:
+How to do other operations with multiple steps:
+	to negate (take additive inverse): push 0, push value, subtract
+	to not (bitwise inverse): push 0, xnor.
+	to push a 1: push 0, increment
+
+The bottom of the stack is always available on data out.
+There are four status flags:
 	00 - zero
+	01 - sign
 	01 - carry / borrow out
-	10 - sign
 	11 - stack empty
-	
-	carry / borrow in

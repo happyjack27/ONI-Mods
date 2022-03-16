@@ -34,13 +34,15 @@ namespace KBComputing.baseClasses
 
         public void RenderEveryTick(float dt)
         {
-            if( UpdateValues())
+            ReadValues();
+            if ( UpdateValues())
                 UpdateVisuals();
         }
+        protected abstract void ReadValues();
 
-        public abstract bool UpdateValues();
+        protected abstract bool UpdateValues();
 
-        public abstract void UpdateVisuals();
+        protected abstract void UpdateVisuals();
 
     }
 }

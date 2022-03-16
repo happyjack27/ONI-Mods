@@ -78,7 +78,9 @@
     <Compile Include="baseClasses\Base4x2Config.cs" />
     <Compile Include="baseClasses\Base2x2Config.cs" />
     <Compile Include="baseClasses\Base2x2.cs" />
+    <Compile Include="Stack8.cs" />
     <Compile Include="Ram8.cs" />
+    <Compile Include="Stack8Config.cs" />
     <Compile Include="Ram8Config.cs" />
     <Compile Include="baseClasses\BaseLogicEveryTick.cs" />
     <Compile Include="baseClasses\Base2x2EveryTickConfig.cs" />
@@ -88,7 +90,6 @@
     <Compile Include="TDeMux.cs" />
     <Compile Include="TMuxConfig.cs" />
     <Compile Include="TDeMuxConfig.cs" />
-    <Compile Include="util\ALU_opcodes.cs" />
     <Compile Include="util\BinaryFormatter.cs" />
     <Compile Include="util\BinaryUtils.cs" />
     <Compile Include="Reg4Config.cs" />
@@ -97,11 +98,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="util\GameStrings.cs" />
     <Compile Include="util\ListOption.cs" />
+    <Compile Include="util\StackOpCodes.cs" />
     <Compile Include="util\StringUtils.cs" />
     <Compile Include="baseClasses\WireToRibbon.cs" />
     <Compile Include="baseClasses\WireToRibbonConfig.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="anim\assets\4x2blue\4x2.pdn" />
+    <None Include="anim\assets\4x2blue\4x2_anim.bytes" />
+    <None Include="anim\assets\4x2blue\4x2_build.bytes" />
+    <None Include="anim\assets\4x2blue\8bit.pdn" />
+    <None Include="anim\assets\4x2blue\8bitui.pdn" />
     <None Include="anim\assets\logic_pulse_counter\logic_pulse_counter_anim.bytes" />
     <None Include="anim\assets\logic_pulse_counter\logic_pulse_counter_build.bytes" />
     <None Include="anim\assets\tdemux\tdemux_anim.bytes" />
@@ -140,6 +147,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="anim\assets\4x2blue\4x2.png" />
+    <Content Include="anim\assets\8bit_stack_alu\8bit_stack_alu.png" />
     <Content Include="anim\assets\logic_pulse_counter\logic_pulse_counter.png" />
     <Content Include="anim\assets\tdemux\tdemux.png" />
     <Content Include="anim\assets\tmux\tmux.png" />
@@ -148,14 +157,15 @@
     <Content Include="anim\assets\8bit_instruction_decoder\8bit_instruction_decoder.png" />
     <Content Include="anim\assets\8bit_ram_module\8bit_ram_module.png" />
     <Content Include="anim\assets\4x2\4x2.png" />
-    <Content Include="anim\assets\8bit_stack_alu\8bit_stack_alu.png" />
     <Content Include="notes\decoder outputs.txt" />
     <Content Include="notes\instructions.txt" />
     <Content Include="notes\stack-based-alu.txt" />
     <Content Include="steam\4regs_unconnected.png" />
     <Content Include="steam\4regs_with_selectors.png" />
+    <Content Include="notes\decisions.txt" />
     <Content Include="steam\mod description.txt" />
     <Content Include="steam\mux_demux.png" />
+    <Content Include="steam\Untitled.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

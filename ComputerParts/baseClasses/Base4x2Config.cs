@@ -16,6 +16,7 @@ namespace KBComputing.baseClasses
 
         //public static string[][] LOGIC_PORT = new string[][] {
         //  new string[] {
+
         public static string LOGIC_PORT00 = "Input Port1";
         public static string LOGIC_PORT01 = "Input Port2";
         public static string LOGIC_PORT02 = "Input Port3";

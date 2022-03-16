@@ -32,7 +32,11 @@ namespace KBComputing
         [Serialize]
         protected int Ticks = 0;
 
-        public override bool UpdateValues()
+        protected override void ReadValues()
+        {
+        }
+
+        protected override bool UpdateValues()
         {
             int PreviousControlPortValue = ControlPort1Value;
             int LastOutput = OutputValue;
@@ -74,7 +78,7 @@ namespace KBComputing
         }
 
 
-        public override void UpdateVisuals()
+        protected override void UpdateVisuals()
         {
             int bit0 = 0, bit1 = 0, bit2 = 0, bit3 = 0;
             bit0 = Ticks == 8 ? 2 : 0;// Ticks == 0 ? 0 : 1;

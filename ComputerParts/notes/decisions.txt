@@ -1,0 +1,47 @@
+﻿
+add instructions:
+---------------
+halt
+dequeue
+
+use ROMS as instruction decoders (make 2?  make 16 bit output?)
+allow edit of memory content?
+
+multiplexing clock
+-------------
+game clock (no clock) ("render every tick")
+single bit clock (edge triggered)
+start transmission rising edge clock
+start transmission rising edge clock + single bit clock (edge triggered)
+ribbon clock
+
+multiplexing
+-------------
+on multiplexer, have option of whether is 2 bits or 4 bits or 8 bits? (default 8, allow copy settings)
+
+1-bit over a wire = 1 bits
+1-bit over a ribbons = 4 bits
+1-bit over 2 ribbons = 8 bits
+
+4-bits over a wire = 4 bits
+4-bits over a ribbon = 16 bits
+4-bits over 2 ribbons = 32 bits
+
+8-bits over a wire = 8 bits
+8-bits over a ribbon = 32 bits
+8-bits over 2 ribbon = 64 bits
+
+16-bits over a wire = 16 bits
+16-bits over a ribbon = 64 bits
+16-bits over 2 ribbons = 128 bits
+
+data tansmission
+---------------
+8-bit
+16-bit
+32-bit
+
+FPU sub-circuit?
+----------------
+
+processor interrupts?

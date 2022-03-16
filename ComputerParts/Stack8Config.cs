@@ -9,27 +9,25 @@ using UnityEngine;
 
 namespace KBComputing
 {
-    class Ram8Config : IBuildingConfig
+    class Stack8Config : IBuildingConfig
     {
-        public static string ID = "Ram8";
-        public static string anim = "8bit_ram_module_kanim";
+        public static string ID = "Stack8";
+        public static string anim = "8bit_stack_alu_kanim";
 
-        public static LocString NAME = (LocString)"8-bit RAM Module";
-        public static LocString DESC = (LocString)"Stores 1024 bytes of data.";
-        public static LocString EFFECT = (LocString)"Addressable random access memory.\n" +
-            "Set the address bits and set the Read Enable bit (First bit on the control input) to read or the Write Enable bit (Second bit on the control input) to write, or both for a zero-delay buffer.\n" +
-            "The third and fourth control bits select from 1 of 4 256-byte memory 'pages', for a total of 1024 bytes of memory.";
+        public static LocString NAME = (LocString)"Stack-based ALU";
+        public static LocString DESC = (LocString)"Performs arithmetic and logic operations on a data stack.";
+        public static LocString EFFECT = DESC;
 
         public static string LOGIC_PORT00 = "Data Input (low bits)";
         public static string LOGIC_PORT01 = "Data Input (high bits)";
-        public static string LOGIC_PORT02 = "Address Input (low bits)";
-        public static string LOGIC_PORT03 = "Address Input (high bits)";
+        public static string LOGIC_PORT02 = "Status Flags (zero,sign,carry/overflow/borrow,stackfault)";
+        public static string LOGIC_PORT03 = "Opcode Input";
         //},
         //new string[] {
         public static string LOGIC_PORT10 = "Data Output (low bits)";
         public static string LOGIC_PORT11 = "Data Output (high bits)";
         public static string LOGIC_PORT12 = "Not a port";
-        public static string LOGIC_PORT13 = "Control Port";
+        public static string LOGIC_PORT13 = "Clock (edge-triggerd)";
 
         public static readonly HashedString PORT_ID00 = new HashedString(LOGIC_PORT00);
         public static readonly HashedString PORT_ID01 = new HashedString(LOGIC_PORT01);
@@ -88,23 +86,13 @@ namespace KBComputing
                     true
                     ),
                 new LogicPorts.Port(
-                    PORT_ID02,
-                    new CellOffset(0, 1),
-                    (string)LOGIC_PORT02,
-                    (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_ACTIVE,
-                    (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_INACTIVE,
-                    true,
-                    LogicPortSpriteType.RibbonInput,
-                    true
-                    ),
-                new LogicPorts.Port(
                     PORT_ID03,
                     new CellOffset(0, 0),
                     (string)LOGIC_PORT03,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_INPUT_ONE_INACTIVE,
                     true,
-                    LogicPortSpriteType.RibbonInput,
+                    LogicPortSpriteType.ControlInput,
                     true
                     ),
                 new LogicPorts.Port(
@@ -114,7 +102,7 @@ namespace KBComputing
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_ACTIVE,
                     (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_INACTIVE,
                     true,
-                    LogicPortSpriteType.ControlInput,
+                    LogicPortSpriteType.ResetUpdate,
                     true
                     ),
             };
@@ -139,6 +127,16 @@ namespace KBComputing
                     LogicPortSpriteType.RibbonOutput,
                     true
                     ),
+                new LogicPorts.Port(
+                    PORT_ID02,
+                    new CellOffset(0, 1),
+                    (string)LOGIC_PORT02,
+                    (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_ACTIVE,
+                    (string)UI.LOGIC_PORTS.GATE_SINGLE_OUTPUT_ONE_INACTIVE,
+                    true,
+                    LogicPortSpriteType.RibbonOutput,
+                    true
+                    ),
             };
 
             GeneratedBuildings.RegisterWithOverlay(OverlayModes.Logic.HighlightItemIDs, ID);
@@ -148,7 +146,7 @@ namespace KBComputing
 
         public override void DoPostConfigureComplete(GameObject go)
         {
-            go.AddOrGet<Ram8>();
+            go.AddOrGet<Stack8>();
             go.GetComponent<KPrefabID>().AddTag(GameTags.OverlayBehindConduits);
         }
     }

@@ -25,19 +25,7 @@ namespace KBComputing.baseClasses
         [Serialize] public int PortValue12 = 0;
         [Serialize] public int PortValue13 = 0;
 
-        public void ReadValues()
-        {
-            PortValue00 = this.GetComponent<LogicPorts>()?.GetInputValue(Base4x2Config.PORT_ID00) ?? 0;
-            PortValue01 = this.GetComponent<LogicPorts>()?.GetInputValue(Base4x2Config.PORT_ID01) ?? 0;
-            PortValue02 = this.GetComponent<LogicPorts>()?.GetInputValue(Base4x2Config.PORT_ID02) ?? 0;
-            PortValue03 = this.GetComponent<LogicPorts>()?.GetInputValue(Base4x2Config.PORT_ID03) ?? 0;
-
-            PortValue10 = this.GetComponent<LogicPorts>()?.GetOutputValue(Base4x2Config.PORT_ID10) ?? 0;
-            PortValue11 = this.GetComponent<LogicPorts>()?.GetOutputValue(Base4x2Config.PORT_ID11) ?? 0;
-            PortValue12 = 0;// this.GetComponent<LogicPorts>()?.GetInputValue(Base4x2Config.PORT_ID12) ?? 0;
-            PortValue13 = this.GetComponent<LogicPorts>()?.GetInputValue(Base4x2Config.PORT_ID13) ?? 0;
-        }
-        public override void UpdateVisuals()
+        protected override void UpdateVisuals()
         {
             if( !this.isActiveAndEnabled)
             {
@@ -78,6 +66,8 @@ namespace KBComputing.baseClasses
             ShowSymbolConditionally2(PortValue11 & (0x01 << 2), $"light{22}_bloom_green", $"light{22}_bloom_red");
             ShowSymbolConditionally2(PortValue11 & (0x01 << 1), $"light{21}_bloom_green", $"light{21}_bloom_red");
             ShowSymbolConditionally2(PortValue11 & (0x01 << 0), $"light{20}_bloom_green", $"light{20}_bloom_red");
+
+            HideOperator();
         }
         protected void ShowSymbolConditionally2(
             int b,
@@ -86,6 +76,32 @@ namespace KBComputing.baseClasses
         {
             kbac.SetSymbolVisiblity(ifTrue, b != 0);
             kbac.SetSymbolVisiblity(ifFalse, b == 0);
+        }
+        private void HideOperator()
+        {
+            kbac.SetSymbolVisiblity("op_add",false);
+            kbac.SetSymbolVisiblity("op_div",false);
+            kbac.SetSymbolVisiblity("op_exp",false);
+            kbac.SetSymbolVisiblity("op_bits_left",false);
+            kbac.SetSymbolVisiblity("op_bits_right",false);
+            kbac.SetSymbolVisiblity("op_mod",false);
+            kbac.SetSymbolVisiblity("op_mul",false);
+            kbac.SetSymbolVisiblity("op_minus",false);
+            kbac.SetSymbolVisiblity("op_less",false);
+            kbac.SetSymbolVisiblity("op_lessThanOrEqual",false);
+            kbac.SetSymbolVisiblity("op_more",false);
+            kbac.SetSymbolVisiblity("op_moreThanOrEqual",false);
+            kbac.SetSymbolVisiblity("op_addadd",false);
+            kbac.SetSymbolVisiblity("op_equality",false);
+            kbac.SetSymbolVisiblity("op_not_equality",false);
+
+        }
+
+        private void ToggleOperator(
+          bool isOperator,
+          KAnimHashedString anim)
+        {
+            kbac.SetSymbolVisiblity(anim, isOperator);
         }
     }
 }

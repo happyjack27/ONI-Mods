@@ -43,13 +43,15 @@ namespace KBComputing.baseClasses
 
         public void OnLogicValueChanged(object data)
         {
+            ReadValues();
             if (UpdateValues())
                 UpdateVisuals();
         }
 
-        public abstract bool UpdateValues();
+        protected abstract void ReadValues();
+        protected abstract bool UpdateValues();
 
-        public abstract void UpdateVisuals();
+        protected abstract void UpdateVisuals();
 
         public void LogicTick()
         {

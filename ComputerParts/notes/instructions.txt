@@ -1,4 +1,7 @@
 ﻿
+
+how to determine whether read out is active?
+
 8-bit instruction set
 =======================
 16 instructions, 2 operands

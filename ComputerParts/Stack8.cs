@@ -1,148 +1,257 @@
 ﻿using KSerialization;
+using STRINGS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
+using static EventSystem;
 
-/*
- * 
- * data2 carry-out  out2
- * data1            out1
- * push
- * pop  carry-in  read-enable?
- * 
- *  
- * 
- * carry in, carry out
- * carry ins processsed first every tick?
- * 
- * b000 - do nothing
- * b001 - pop (return)
- * b010 - push (call)
- * b011 - overwrite (jump)
- * 
- * b100 - ?add (next instruction?) (ignored if a carry in is conencted)
- * b101 - ?pop and add (relative return?)
- * 
- * b110 - push and add (relative call)
- * b111 - add and overwrite (relative jump)
- * 
- * 
- */
 namespace KBComputing
 {
-    class Stack8 : Reg4
+    [SerializationConfig(MemberSerialization.OptIn)]
+    class Stack8 : baseClasses.Base4x2
     {
-        public static readonly HashedString INPUT_PORT_ID1B = new HashedString("AluGateInput1B");
-        public static readonly HashedString INPUT_PORT_ID2B = new HashedString("AluGateInput2B");
-        public static readonly HashedString OUTPUT_PORT_IDB = new HashedString("AluGateOutputB");
+        [Serialize]
+        public int LastClock = 0;
+        [Serialize]
+        public Stack<byte> Stack = new Stack<byte>();
 
-        public byte[] memory_contents = new byte[256];
-
-        public Ram8() : base()
+        protected override void ReadValues()
         {
-            this.bits = 8;
-            this.maxValue = 0xff;
-        }
-        public override void LogicTick()
-        {
+            PortValue00 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID00) ?? 0;
+            PortValue01 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID01) ?? 0;
+            PortValue02 = this.GetComponent<LogicPorts>()?.GetOutputValue(Ram8Config.PORT_ID02) ?? 0;
+            PortValue03 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID03) ?? 0;
 
-        }
-
-        public override int GetInputValue1()
-        {
-            var val1 = base.GetInputValue1();
-            var val2 = this.ports?.GetInputValue(Ram8.INPUT_PORT_ID1B) ?? 0;
-
-            return (val1 << 4) | val2;
-
+            PortValue10 = this.GetComponent<LogicPorts>()?.GetOutputValue(Ram8Config.PORT_ID10) ?? 0;
+            PortValue11 = this.GetComponent<LogicPorts>()?.GetOutputValue(Ram8Config.PORT_ID11) ?? 0;
+            PortValue12 = 0;// this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID12) ?? 0;
+            PortValue13 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID13) ?? 0;
         }
 
-        public override int GetInputValue2()
+        protected override bool UpdateValues()
         {
-            var val1 = base.GetInputValue2();
-            var val2 = this.ports?.GetInputValue(Ram8.INPUT_PORT_ID2B) ?? 0;
+            if( PortValue13 == LastClock)
+            {
+                return true;
+            }
+            LastClock = PortValue13;
 
-            return (val1 << 4) | val2;
+            byte dataIn = (byte)((PortValue01 << 4 | PortValue00) & 0xFF);
+            byte operation = (byte)PortValue03;
+            byte flags = (byte)PortValue02;
 
+            if( operation  == (byte)StackOpCodes.standby)
+            {
+                return true;
+            }
+
+            //clear fault flag
+            flags = (byte)(flags & ~StackFlags.fault);
+
+            try
+            {
+                bool done = true;
+                switch (operation)
+                {
+                    //stack
+                    case (int)StackOpCodes.pop:// = 0b0001,
+                        Stack.Pop();
+                        break;
+                    case (int)StackOpCodes.push:// = 0b0010,
+                        Stack.Push(dataIn);
+                        break;
+                    case (int)StackOpCodes.replace:// = 0b0011,
+                        Stack.Pop();
+                        Stack.Push(dataIn);
+                        break;
+                    //other
+                    case (int)StackOpCodes.increment:// = 0b0101,
+                        Stack.Push(1);
+                        operation = (byte)StackOpCodes.add;
+                        done = false;
+                        break;
+                    case (int)StackOpCodes.queue:// = 0b0110,
+                        Stack.Append(dataIn);
+                        break;
+                    case (int)StackOpCodes.push0:// = 0b0111,
+                        Stack.Push(0);
+                        break;
+                    default:
+                        done = false;
+                        break;
+                }
+                if( done)
+                {
+                    sendOutput(flags);
+                    return true;
+                }
+
+                //sbyte srhs = (sbyte)rhs;
+                //sbyte slhs = (sbyte)lhs;
+                int irhs = (int)Stack.Pop();
+                int ilhs = (int)Stack.Pop();
+                byte rhs = (byte)irhs;
+                byte lhs = (byte)ilhs;
+
+                //clear carry flag
+                flags = (byte)(flags & ~StackFlags.carry);
+
+                switch (operation)
+                {
+                    //other
+                    case (int)StackOpCodes.shift:// = 0b0100,
+                        lhs = (byte)(rhs >= 0 ? lhs << rhs : lhs >> rhs);
+                        Stack.Push(lhs);
+                        break;
+                    //arithmetic
+                    case (int)StackOpCodes.add:// = 0b1000,
+                        flags = setCarry(flags, ilhs + irhs);
+                        Stack.Push((byte)(ilhs+irhs));
+                        break;
+                    case (int)StackOpCodes.subtract://= 0b1001,
+                        flags = setCarry(flags, ilhs - irhs);
+                        Stack.Push((byte)(ilhs-irhs));
+                        break;
+                    case (int)StackOpCodes.multiply:// = 0b1010,
+                        flags = setCarry(flags, ilhs * irhs);
+                        int mresult = ilhs * irhs;
+                        Stack.Push((byte)(mresult >> 8));
+                        Stack.Push((byte)(mresult & 0xFF));
+                        break;
+                    case (int)StackOpCodes.divide:// = 0b1011,
+                        int div = ilhs / irhs;
+                        int mod = ilhs % irhs;
+                        Stack.Push((byte)div);
+                        Stack.Push((byte)mod);
+                        break;
+                    //bitwise
+                    case (int)StackOpCodes.or:// = 0b1100,
+                        Stack.Push((byte)(lhs | rhs));
+                        break;
+                    case (int)StackOpCodes.and:// = 0b1101,
+                        Stack.Push((byte)(lhs & rhs));
+                        break;
+                    case (int)StackOpCodes.xor:// = 0b1110,
+                        Stack.Push((byte)(lhs ^ rhs));
+                        break;
+                    case (int)StackOpCodes.xnor:// = 0b1111,
+                        Stack.Push((byte)~(lhs ^ rhs));
+                        break;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                flags = (byte)(flags | StackFlags.fault);
+            }
+            sendOutput(flags);
+            return true;
         }
-
-        protected override bool IsOnAnimation()
+        public byte setCarry(byte flag, int result)
         {
-            var nw1b = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.INPUT_PORT_ID1B));
-            var nw2b = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.INPUT_PORT_ID2B));
-            var nwOutb = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.OUTPUT_PORT_IDB));
-            return base.IsOnAnimation() && nw1b != null && nw2b != null && nwOutb != null; 
+            bool carry = ((result & 0xFF00) >> 8) != 0;
+            if( carry) flag |= StackFlags.carry;
+            return flag;
         }
-
-        protected override bool ShouldRecalcValue(LogicValueChanged logicValueChanged)
+        public void sendOutput(byte flags)
         {
-            return base.ShouldRecalcValue(logicValueChanged)
-                && logicValueChanged.portID != Ram8.OUTPUT_PORT_IDB;
-        }
+            sbyte dataOut = (sbyte)(Stack.Count <= 0 ? 0 : Stack.Peek());
+            byte outHigh = (byte)((dataOut >> 4) & 0xFF);
+            byte outLow = (byte)(dataOut & 0xFF);
+            PortValue10 = outLow;
+            PortValue11 = outHigh;
+            this.GetComponent<LogicPorts>().SendSignal(Stack8Config.PORT_ID10, PortValue10);
+            this.GetComponent<LogicPorts>().SendSignal(Stack8Config.PORT_ID11, PortValue11);
 
-        protected override void UpdateValue()
-        {
-            this.outputValue1 = memory_contents[this.currentAddress];
-            var val1 = this.outputValue1 >> 4;
-            var val2 = this.outputValue1 & 0xf;
-            this.GetComponent<LogicPorts>().SendSignal(Reg4.OUTPUT_PORT_ID, val1);
-            this.GetComponent<LogicPorts>().SendSignal(Ram8.OUTPUT_PORT_IDB, val2);
-        }
+            //clear all but carry and fault flag
+            flags &= (byte)~(StackFlags.fault | StackFlags.carry);
 
-        protected override bool HasPort(HashedString portId)
-        {
-            return base.HasPort(portId)
-                || portId == Ram8.INPUT_PORT_ID1B
-                || portId == Ram8.INPUT_PORT_ID2B
-                || portId == Ram8.OUTPUT_PORT_IDB;
-        }
+            //now set flags
+            flags |= (byte)(dataOut == 0 ? StackFlags.zero : 0);
+            flags |= (byte)(dataOut  < 0 ? StackFlags.sign : 0);
+            if (Stack.Count > 256)
+            {
+                flags |= (byte)StackFlags.fault;
+                while(Stack.Count > 256)
+                    Stack.Pop();
+            }
 
-        protected override void ToggleBlooms()
-        {
-            var nw1 = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.INPUT_PORT_ID1));
-            var nw1b = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.INPUT_PORT_ID1B));
-            var nw2 = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.INPUT_PORT_ID2));
-            var nw2b = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.INPUT_PORT_ID2B));
-            var nwOp = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.OP_PORT_ID));
-            var nwOut = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.OUTPUT_PORT_ID));
-            var nwOutb = Game.Instance.logicCircuitManager.GetNetworkForCell(this.ports.GetPortCell(Ram8.OUTPUT_PORT_IDB));
-            ShowSymbolConditionally(nwOp, () => nwOp.OutputValue > 0, $"light{24}_bloom_green", $"light{24}_bloom_red");
-
-
-            //16-19 outb
-            ShowSymbolConditionally(nwOutb, () => LogicCircuitNetwork.IsBitActive(3, nwOutb.OutputValue), $"light{19}_bloom_green", $"light{19}_bloom_red");
-            ShowSymbolConditionally(nwOutb, () => LogicCircuitNetwork.IsBitActive(2, nwOutb.OutputValue), $"light{18}_bloom_green", $"light{18}_bloom_red");
-            ShowSymbolConditionally(nwOutb, () => LogicCircuitNetwork.IsBitActive(1, nwOutb.OutputValue), $"light{17}_bloom_green", $"light{17}_bloom_red");
-            ShowSymbolConditionally(nwOutb, () => LogicCircuitNetwork.IsBitActive(0, nwOutb.OutputValue), $"light{16}_bloom_green", $"light{16}_bloom_red");
-            // 20-23 out
-            ShowSymbolConditionally(nwOut, () => LogicCircuitNetwork.IsBitActive(3, nwOut.OutputValue), $"light{23}_bloom_green", $"light{23}_bloom_red");
-            ShowSymbolConditionally(nwOut, () => LogicCircuitNetwork.IsBitActive(2, nwOut.OutputValue), $"light{22}_bloom_green", $"light{22}_bloom_red");
-            ShowSymbolConditionally(nwOut, () => LogicCircuitNetwork.IsBitActive(1, nwOut.OutputValue), $"light{21}_bloom_green", $"light{21}_bloom_red");
-            ShowSymbolConditionally(nwOut, () => LogicCircuitNetwork.IsBitActive(0, nwOut.OutputValue), $"light{20}_bloom_green", $"light{20}_bloom_red");
-
-            //in1b 0-3
-            ShowSymbolConditionally(nw1b, () => LogicCircuitNetwork.IsBitActive(3, nw1b.OutputValue), $"light{3}_bloom_green", $"light{3}_bloom_red");
-            ShowSymbolConditionally(nw1b, () => LogicCircuitNetwork.IsBitActive(2, nw1b.OutputValue), $"light{2}_bloom_green", $"light{2}_bloom_red");
-            ShowSymbolConditionally(nw1b, () => LogicCircuitNetwork.IsBitActive(1, nw1b.OutputValue), $"light{1}_bloom_green", $"light{1}_bloom_red");
-            ShowSymbolConditionally(nw1b, () => LogicCircuitNetwork.IsBitActive(0, nw1b.OutputValue), $"light{0}_bloom_green", $"light{0}_bloom_red");
-            //in1 4-7
-            ShowSymbolConditionally(nw1, () => LogicCircuitNetwork.IsBitActive(3, nw1.OutputValue), $"light{7}_bloom_green", $"light{7}_bloom_red");
-            ShowSymbolConditionally(nw1, () => LogicCircuitNetwork.IsBitActive(2, nw1.OutputValue), $"light{6}_bloom_green", $"light{6}_bloom_red");
-            ShowSymbolConditionally(nw1, () => LogicCircuitNetwork.IsBitActive(1, nw1.OutputValue), $"light{5}_bloom_green", $"light{5}_bloom_red");
-            ShowSymbolConditionally(nw1, () => LogicCircuitNetwork.IsBitActive(0, nw1.OutputValue), $"light{4}_bloom_green", $"light{4}_bloom_red");
-
-            //in2b 8-11
-            ShowSymbolConditionally(nw2b, () => LogicCircuitNetwork.IsBitActive(3, nw2b.OutputValue), $"light{11}_bloom_green", $"light{11}_bloom_red");
-            ShowSymbolConditionally(nw2b, () => LogicCircuitNetwork.IsBitActive(2, nw2b.OutputValue), $"light{10}_bloom_green", $"light{10}_bloom_red");
-            ShowSymbolConditionally(nw2b, () => LogicCircuitNetwork.IsBitActive(1, nw2b.OutputValue), $"light{9}_bloom_green", $"light{9}_bloom_red");
-            ShowSymbolConditionally(nw2b, () => LogicCircuitNetwork.IsBitActive(0, nw2b.OutputValue), $"light{8}_bloom_green", $"light{8}_bloom_red");
-            //in2 12-15
-            ShowSymbolConditionally(nw2, () => LogicCircuitNetwork.IsBitActive(3, nw2.OutputValue), $"light{15}_bloom_green", $"light{15}_bloom_red");
-            ShowSymbolConditionally(nw2, () => LogicCircuitNetwork.IsBitActive(2, nw2.OutputValue), $"light{14}_bloom_green", $"light{14}_bloom_red");
-            ShowSymbolConditionally(nw2, () => LogicCircuitNetwork.IsBitActive(1, nw2.OutputValue), $"light{13}_bloom_green", $"light{13}_bloom_red");
-            ShowSymbolConditionally(nw2, () => LogicCircuitNetwork.IsBitActive(0, nw2.OutputValue), $"light{12}_bloom_green", $"light{12}_bloom_red");
+            PortValue02 = flags;
+            this.GetComponent<LogicPorts>().SendSignal(Stack8Config.PORT_ID02, PortValue02);
+            return;
         }
     }
 }
+
+            /*
+00 - data
+	00 - no operation
+	01 - pop (discard)
+	10 - push
+	11 - replace
+01 - other
+	00 - pop and shift (sign determines direction)
+	01 - pop and rotate (sign determines direction)
+	10 - queue (put on top of stack)
+	11 - push 0
+10 - arithmetic
+	00 - pop and add
+	01 - pop and subtract
+	10 - pop and multiply (put high bits on stack)
+	11 - pop and divide (put modulus on stack)
+11 - bitwise logic
+	00 - pop and or
+	01 - pop and and
+	10 - pop and xor
+	11 - pop and xnor
+
+compound operations to do a unary operation:
+	to negate (take additive inverse): push 0, push value, subtract
+	to not (bitwise inverse): push 0, push value, xnor.
+	to push a -1 (all bits on): push 0, push 0, xnor
+	to push a 1: push 0, push 0, push 0, xnor, subtract
+	to check if certain bits are set/unset: push value, push care bits as 1s, and, push desired bit values, xnor, zero flag signifies match.
+
+four status flags:
+	00 - zero
+	01 - sign
+	01 - carry / borrow out
+	11 - stack empty             */
+            /*
+            int newOut = 0;
+
+            int dataIn  = (PortValue00 << 4 | PortValue01) & 0xFF;
+            int address = (PortValue02 << 4 | PortValue03) & 0xFF;
+            int operation = PortValue13;
+            int page_select = (PortValue13 >> 2) & 0x03;
+            address = address | (page_select << 8);
+
+            //write bit set
+            if ((operation & 0x02) > 0)
+            {
+                Memory[address] = (byte)(dataIn & 0xFF);
+            }
+            //read bit set
+            if ((operation & 0x01) > 0)
+            {
+                newOut = Memory[address] & 0xFF;
+            }
+
+            int newOut0 = (newOut >> 4) & 0x0F;
+            int newOut1 = newOut & 0x0F;
+
+            if (newOut0 != PortValue10)
+            {
+                PortValue10 = newOut0;
+                this.GetComponent<LogicPorts>().SendSignal(Stack8Config.PORT_ID10, PortValue10);
+            }
+            
+            if (newOut1 != PortValue11)
+            {
+                PortValue11 = newOut1;
+                this.GetComponent<LogicPorts>().SendSignal(Stack8Config.PORT_ID11, PortValue11);
+            }
+            */
+

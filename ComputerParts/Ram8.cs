@@ -15,41 +15,54 @@ namespace KBComputing
     {
 
         [Serialize]
-        public byte[] Memory = new byte[]
+        public byte[] Memory = new byte[1024];
+        /*
+    {
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+        0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+
+    };
+        */
+        protected override void ReadValues()
         {
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            PortValue00 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID00) ?? 0;
+            PortValue01 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID01) ?? 0;
+            PortValue02 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID02) ?? 0;
+            PortValue03 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID03) ?? 0;
 
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
+            PortValue10 = this.GetComponent<LogicPorts>()?.GetOutputValue(Ram8Config.PORT_ID10) ?? 0;
+            PortValue11 = this.GetComponent<LogicPorts>()?.GetOutputValue(Ram8Config.PORT_ID11) ?? 0;
+            PortValue12 = 0;// this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID12) ?? 0;
+            PortValue13 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID13) ?? 0;
+        }
 
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-            0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
-
-        };
-
-        public override bool UpdateValues()
+        protected override bool UpdateValues()
         {
-            ReadValues();
-            
             int newOut = 0;
 
             int dataIn  = (PortValue00 << 4 | PortValue01) & 0xFF;
             int address = (PortValue02 << 4 | PortValue03) & 0xFF;
             int operation = PortValue13;
+            int page_select = (PortValue13 >> 2) & 0x03;
+            address = address | (page_select << 8);
 
-            
             //write bit set
             if ((operation & 0x02) > 0)
             {

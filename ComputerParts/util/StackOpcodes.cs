@@ -15,9 +15,9 @@ namespace KBComputing
         push = 0b0011,
         //other
         increment = 0b0100,
-        reserved1 = 0b0101,
-        reserved2 = 0b0111,
-        reserved3 = 0b0110,
+        swap = 0b0101,
+        copy_from = 0b0111,
+        copy_to = 0b0110,
         //arithmetic
         add = 0b1000,
         subtract = 0b1001,

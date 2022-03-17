@@ -2,10 +2,6 @@
 Stack-Based Arithmetic and Logic Unit (8-bit)
 =============================================
 
-NOTE TO SELF: need two more operations:
-* hide output (sends zeros to data out, without affecting stack)
-* peek stack ( replaces the top of the stack with the value x deep in the stack)
-
 The stack-based ALU is a more powerfull form of an Arithmetic and Logic Unit (ALU) that can also be used as a register or an instruction sequencer.
 
 For more detailed explanation of how and why, read up on "Stack Machines".
@@ -85,9 +81,9 @@ Operation List (OpCodes)
 	0011 - push (push data in to top of stack)
 01 - special
 	0100 - increment top of stack
-	0101 - undecided
-	0110 - undecided
-	0111 - undecided
+	0101 - swap top and next (might change)
+	0110 - copy from stack index (if 0, returns the current size of the stack) 
+	0111 - undecided (write to stack?)
 	swap top and next? ("swap") copy top? (""dup")  read from stack depth (top specifies index, data is copied to top)?  same thing but write next?
 10 - arithmetic
 	1000 - pop and add

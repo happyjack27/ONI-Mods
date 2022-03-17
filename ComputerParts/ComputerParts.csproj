@@ -90,8 +90,6 @@
     <Compile Include="TDeMux.cs" />
     <Compile Include="TMuxConfig.cs" />
     <Compile Include="TDeMuxConfig.cs" />
-    <Compile Include="util\BinaryFormatter.cs" />
-    <Compile Include="util\BinaryUtils.cs" />
     <Compile Include="Reg4Config.cs" />
     <Compile Include="Reg4.cs" />
     <Compile Include="Patches.cs" />

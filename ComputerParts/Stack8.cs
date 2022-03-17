@@ -67,6 +67,21 @@ namespace KBComputing
                         operation = (byte)StackOpCodes.add;
                         done = false;
                         break;
+                    case (int)StackOpCodes.swap:// = 0b1000,
+                        {
+                            int a = Stack.Pop();
+                            int b = Stack.Pop();
+                            Stack.Push((byte)a);
+                            Stack.Push((byte)b);
+                        }
+                        break;
+                    case (int)StackOpCodes.copy_from:// = 0b1000,
+                        {
+                            int a = Stack.Pop();
+                            byte b = a == 0 ? (byte)Stack.Count : Stack.ElementAt(a);
+                            Stack.Push(b);
+                        }
+                        break;
                     default:
                         done = false;
                         break;

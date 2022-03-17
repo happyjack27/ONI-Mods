@@ -10,14 +10,14 @@ namespace KBComputing
     {
         //stack
         standby = 0b0000,
-        pop = 0b0001,
-        push = 0b0010,
-        replace = 0b0011,
+        peek = 0b001,
+        pop = 0b0010,
+        push = 0b0011,
         //other
-        shift = 0b0100,
-        increment = 0b0101,
-        queue = 0b0110,
-        push0 = 0b0111,
+        increment = 0b0100,
+        reserved1 = 0b0101,
+        reserved2 = 0b0111,
+        reserved3 = 0b0110,
         //arithmetic
         add = 0b1000,
         subtract = 0b1001,

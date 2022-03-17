@@ -13,6 +13,26 @@ namespace KBComputing
     [SerializationConfig(MemberSerialization.OptIn)]
     class TMux : baseClasses.BaseLogicOnChange
     {
+        //all
+        [Serialize]
+        protected int ConfigMultiplexClockMultiple = 1; //1,2,4,8,16
+        [Serialize]
+        protected int ConfigMultiplexLevel = 1; //1,2,4,8,(16)  (default for multiplexers is 8)
+        //if a ribbon is connected, will copy down the ribbon,
+
+        // striped or segmented?
+
+        // cpus only
+        [Serialize]
+        protected int ConfigDataPinsUsed = 8; //
+
+        //output only  = ConfigMultiplexLevel * ConfigDataPinsUsed
+        [Serialize]
+        protected int ConfigEffectiveBitWidth = 8;
+        //output only  = ConfigDataPinsUsed / ConfigMultiplexClockMultiple
+        [Serialize]
+        protected int ConfigEffectiveThroughput = 8;
+
         [Serialize]
         protected int InputValue1 = 0;
         [Serialize]

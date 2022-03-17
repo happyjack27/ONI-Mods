@@ -11,11 +11,92 @@ using static EventSystem;
 namespace KBComputing
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    class Ram8 : baseClasses.Base4x2
+    class Ram8 : baseClasses.Base4x2, IMemoryContents
     {
 
         [Serialize]
         public byte[] Memory = new byte[1024];
+
+        [Serialize]
+        public string DisplayStyle = "HEX"; // HEX char int stackops instructions 
+        static readonly string HEX = "0123456789ABCDEF";
+        static readonly byte[] REVERSE_HEX;
+
+        public string ContentDisplayStyle { get { return DisplayStyle; } set { DisplayStyle = value; } }
+
+        static Ram8() {
+            REVERSE_HEX = new byte[256];
+            for( byte i = 0; i < HEX.Length; i++)
+            {
+                REVERSE_HEX[HEX[i]] = i;
+            }
+        }
+        public void ClearContents(int bank)
+        {
+            int start = bank * 256;
+            int end = start + 256;
+            for( int i = start; i < end; i++ )
+            {
+                Memory[i] = 0;
+            }
+        }
+
+        public bool setContents(int bank, string value)
+        {
+            string s = "" + value;
+            s = s.Replace(" ", "").Replace("\n", "").ToUpper();
+            int w = 0+bank*256;
+            int h = 0;
+            byte b = 0;
+            for (int r = 0; r < s.Length; r++)
+            {
+                if (h == 0)
+                {
+                    b = REVERSE_HEX[s[r]];
+                    h = 1;
+                }
+                if (h == 1)
+                {
+                    b <<= 4;
+                    b |= REVERSE_HEX[s[r]];
+                    Memory[w] = b;
+                    w++;
+                    h = 0;
+                }
+            }
+            return true;
+        }
+
+        public string getContents(int bank) {
+            string s = "";
+            int offset = bank * 256;
+            for( int i = 0; i < 256; i++) 
+            {
+                if (i % 256 == 0)
+                {
+                    s += "\n\n\n\n";
+                }
+                if (i % 64 == 0)
+                {
+                    s += "\n\n";
+                }
+                if (i % 16 == 0)
+                {
+                    s += "\n";
+                }
+                else
+                if (i % 4 == 0)
+                {
+                    s += " ";
+                }
+                byte b = Memory[i+offset];
+                s += HEX[(b >> 4) & 0x0F];
+                s += HEX[(b >> 0) & 0x0F];
+                s += " ";
+            }
+            return s;
+        }
+
         /*
     {
         0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0,
@@ -91,5 +172,6 @@ namespace KBComputing
             
             return true;
         }
+
     }
 }

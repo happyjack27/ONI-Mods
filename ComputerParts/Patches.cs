@@ -1,4 +1,5 @@
 using HarmonyLib;
+using PeterHan.PLib.UI;
 //using PeterHan.PLib.UI;
 using System;
 using System.Reflection;
@@ -15,6 +16,16 @@ namespace KBComputing
 
         }
 
+
+        [HarmonyPatch(typeof(DetailsScreen), "OnPrefabInit")]
+        public static class SideScreenCreator
+        {
+            internal static void Postfix()
+            {
+                PUIUtils.AddSideScreenContent<MemoryContentsSideScreen>();
+                //PUIUtils.AddSideScreenContent<MultiplexerSideScreen>();
+            }
+        }
 
         [HarmonyPatch(typeof(Db))]
         [HarmonyPatch("Initialize")]

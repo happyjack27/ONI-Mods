@@ -11,16 +11,15 @@ using static EventSystem;
 namespace KBComputing
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    class TMux : baseClasses.BaseLogicOnChange
+    class TMux : baseClasses.BaseLogicOnChange, IMultiplexed
     {
-        //all
         [Serialize]
-        protected int ConfigMultiplexClockMultiple = 1; //1,2,4,8,16
+        protected int ConfigClockDivider = 1; //1,2,4,8,16
         [Serialize]
-        protected int ConfigMultiplexLevel = 1; //1,2,4,8,(16)  (default for multiplexers is 8)
-        //if a ribbon is connected, will copy down the ribbon,
+        protected int ConfigMultiplexAmount = 1; //1,2,4,8,(16)  (default for multiplexers is 8)
+        public int ClockDivision { get { return ConfigClockDivider; } set { ConfigClockDivider = value; } }
+        public int MultiplexAmount { get { return ConfigMultiplexAmount; } set { ConfigMultiplexAmount = value; } }
 
-        // striped or segmented?
 
         // cpus only
         [Serialize]

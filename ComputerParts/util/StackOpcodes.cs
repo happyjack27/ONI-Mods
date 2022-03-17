@@ -6,6 +6,28 @@ using System.Threading.Tasks;
 
 namespace KBComputing
 {
+    class StackOpCodeTranslate
+    {
+        public static string[] NAMES = new string[] {
+            "standby",
+            "peek",
+            "pop",
+            "push",
+            "increment",
+            "swap",
+            "copyfrom",
+            "reserved",
+            "add",
+            "subtract",
+            "multiply",
+            "divide",
+            "or",
+            "and",
+            "xor",
+            "nor",
+        };
+    }
+    
     enum StackOpCodes
     {
         //stack

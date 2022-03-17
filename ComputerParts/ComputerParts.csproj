@@ -49,6 +49,10 @@
     <Reference Include="FMODUnityResonance">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\OxygenNotIncluded\OxygenNotIncluded_Data\Managed\FMODUnityResonance.dll</HintPath>
     </Reference>
+    <Reference Include="PLib, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\PLib.4.8.1\lib\net471\PLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -78,6 +82,12 @@
     <Compile Include="baseClasses\Base4x2Config.cs" />
     <Compile Include="baseClasses\Base2x2Config.cs" />
     <Compile Include="baseClasses\Base2x2.cs" />
+    <Compile Include="SiideScreens\AbstractSideScreen.cs" />
+    <Compile Include="SiideScreens\MultiplexerSideScreen.cs" />
+    <Compile Include="SiideScreens\SideScreenStrings.cs" />
+    <Compile Include="SiideScreens\IMemoryContents.cs" />
+    <Compile Include="SiideScreens\IMultiplexed.cs" />
+    <Compile Include="SiideScreens\MemoryContentsSideScreen.cs" />
     <Compile Include="Stack8.cs" />
     <Compile Include="Ram8.cs" />
     <Compile Include="Stack8Config.cs" />
@@ -143,6 +153,12 @@
     <None Include="mod_info.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="packages\ILMerge.3.0.40\.signature.p7s" />
+    <None Include="packages\ILMerge.3.0.40\build\ILMerge.props" />
+    <None Include="packages\ILMerge.3.0.40\docs\ilmerge-manual.md" />
+    <None Include="packages\ILMerge.3.0.40\ILMerge.3.0.40.nupkg" />
+    <None Include="packages\PLib.4.8.1\.signature.p7s" />
+    <None Include="packages\PLib.4.8.1\PLib.4.8.1.nupkg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="anim\assets\4x2blue\4x2.png" />
@@ -158,11 +174,17 @@
     <Content Include="notes\decoder outputs.txt" />
     <Content Include="notes\instructions.txt" />
     <Content Include="notes\stack-based-alu.txt" />
+    <Content Include="packages\ILMerge.3.0.40\tools\net452\ILMerge.exe" />
+    <Content Include="packages\ILMerge.3.0.40\tools\net452\System.Compiler.dll" />
+    <Content Include="packages\PLib.4.8.1\icon.png" />
+    <Content Include="packages\PLib.4.8.1\lib\net471\PLib.dll" />
+    <Content Include="packages\PLib.4.8.1\lib\net471\PLib.xml" />
     <Content Include="steam\4regs_unconnected.png" />
     <Content Include="steam\4regs_with_selectors.png" />
     <Content Include="notes\decisions.txt" />
     <Content Include="steam\mod description.txt" />
     <Content Include="steam\mux_demux.png" />
+    <Content Include="steam\stack alu.png" />
     <Content Include="steam\Untitled.png" />
   </ItemGroup>
   <ItemGroup />

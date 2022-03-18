@@ -3,13 +3,16 @@ ribbon a (read channel selector)
 ===============================
 channel read selector (3 bits) 
 1bb stacks, 
-000 alu, 001 instruction pointer, 010 i/o data, 011 instruction value
+000 alu, 001 instruction pointer, 010 i/o data, 011 instruction value (load immediate)
 
 ribbon b (write channel)
 ===============================
 channel write selector (3 bits) 
 1bb stacks, 
 000 alu, 001 instruction pointer, 010 i/o data, 011 i/o address
+
+transfer
+predicate
 
 ribbon c (alu control or stack control)
 ===============================

@@ -3,6 +3,7 @@ using PeterHan.PLib.UI;
 //using PeterHan.PLib.UI;
 using System;
 using System.Reflection;
+using KBComputing.util;
 //using util;
 using static STRINGS.UI.BUILDCATEGORIES;
 
@@ -22,7 +23,7 @@ namespace KBComputing
         {
             internal static void Postfix()
             {
-                PUIUtils.AddSideScreenContent<MemoryContentsSideScreen>();
+                PUIUtils.AddSideScreenContent<SideScreens.MemoryContentsSideScreen>();
                 //PUIUtils.AddSideScreenContent<MultiplexerSideScreen>();
             }
         }

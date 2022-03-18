@@ -1,6 +1,5 @@
 ﻿/*
  * Copyright 2020 Dense Logic Team
- * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software
  * and associated documentation files (the "Software"), to deal in the Software without
  * restriction, including without limitation the rights to use, copy, modify, merge, publish,
@@ -17,14 +16,37 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-namespace KBComputing {
-	public interface IMemoryContents {
+using System;
 
-		string ContentDisplayStyle { get; set; }
-		string getContents(int bank, string style);
-		bool setContents(int bank, string style, string value);
+namespace ONI_DenseLogic
+{
+	internal sealed class BitOption : IListableOption {
+		public static implicit operator BitOption(LocString name) => new BitOption(name);
 
-		void ClearContents(int bank);
+		public static bool operator ==(BitOption one, BitOption two) => one.Equals(two);
 
+		public static bool operator !=(BitOption one, BitOption two) => !one.Equals(two);
+
+		private readonly string name;
+
+		public BitOption(string name) {
+			this.name = name ?? throw new ArgumentNullException("name");
+		}
+
+		public override bool Equals(object obj) {
+			return obj is BitOption other && other.name == name;
+		}
+
+		public override int GetHashCode() {
+			return name.GetHashCode();
+		}
+
+		public string GetProperName() {
+			return name;
+		}
+
+		public override string ToString() {
+			return name;
+		}
 	}
 }

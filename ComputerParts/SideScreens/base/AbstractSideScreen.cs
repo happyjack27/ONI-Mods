@@ -11,7 +11,7 @@ namespace KBComputing {
 
 		protected T target;
 
-		protected void ClearTarget() {
+		public sealed override void ClearTarget() {
 			target = default(T);
 		}
 

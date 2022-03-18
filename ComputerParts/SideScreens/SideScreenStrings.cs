@@ -31,6 +31,8 @@ namespace KBComputing {
 			// These will be resolved in the same order anyways so save some space
 			private static readonly string GREEN = ONI_UI.FormatAsAutomationState("Green", AutomationState.Active);
 			private static readonly string RED = ONI_UI.FormatAsAutomationState("Red", AutomationState.Standby);
+			private static readonly string B0 = ONI_UI.FormatAsAutomationState("0", AutomationState.Standby);
+			private static readonly string B1 = ONI_UI.FormatAsAutomationState("1", AutomationState.Active);
 			private static readonly string GREEN_SIGNAL = ONI_UI.FormatAsAutomationState("Green Signal", AutomationState.Active);
 			private static readonly string RED_SIGNAL = ONI_UI.FormatAsAutomationState("Red Signal", AutomationState.Standby);
 			private static readonly string AUTOMATION = ONI_UI.FormatAsLink("Automation", "LOGIC");
@@ -38,6 +40,31 @@ namespace KBComputing {
 			// Already has a link
 			private static readonly string RIBBON_CABLE = STRINGS.BUILDINGS.PREFABS.LOGICRIBBON.NAME;
 
+			public static class FOURBITS
+			{
+				public static LocString[] FORMATTED = new LocString[]
+				{
+					$"{B0}{B0}{B0}{B0}",
+					$"{B0}{B0}{B0}{B1}",
+					$"{B0}{B0}{B1}{B0}",
+					$"{B0}{B0}{B1}{B1}",
+
+					$"{B0}{B1}{B0}{B0}",
+					$"{B0}{B1}{B0}{B1}",
+					$"{B0}{B1}{B1}{B0}",
+					$"{B0}{B1}{B1}{B1}",
+
+					$"{B1}{B0}{B0}{B0}",
+					$"{B1}{B0}{B0}{B1}",
+					$"{B1}{B0}{B1}{B0}",
+					$"{B1}{B0}{B1}{B1}",
+
+					$"{B1}{B1}{B0}{B0}",
+					$"{B1}{B1}{B0}{B1}",
+					$"{B1}{B1}{B1}{B0}",
+					$"{B1}{B1}{B1}{B1}"
+				};
+			}
 			public static class PREFABS {
 				public static class DENSELOGICTEAM_DENSEGATE {
 					public static LocString NAME = "Dense Multigate";

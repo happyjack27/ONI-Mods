@@ -18,19 +18,42 @@ namespace KBComputing
         public byte[] Memory = new byte[1024];
 
         [Serialize]
-        public string DisplayStyle = "HEX"; // HEX char int stackops instructions 
-        static readonly char[] HEX = "0123456789ABCDEF".ToCharArray();
-        static readonly byte[] REVERSE_HEX;
+        public string DisplayMode = "HEX"; // HEX char int stackops instructions
 
-        public string ContentDisplayStyle { get { return DisplayStyle; } set { DisplayStyle = value; } }
+        [Serialize]
+        public int DisplayBank = 0; // HEX char int stackops instructions
+        
+        [Serialize]
+        public int DisplayOffset = 0; // HEX char int stackops instructions
 
-        static Ram8() {
-            REVERSE_HEX = new byte[256];
-            for( byte i = 0; i < HEX.Length; i++)
+
+        public string ContentDisplayMode { get { return DisplayMode; } set { DisplayMode = value; } }
+        public int ContentDisplayBank { get { return DisplayBank; } set { DisplayBank = value; } }
+        public int ContentDisplayOffset { get { return DisplayOffset; } set { DisplayOffset = value; } }
+
+        public byte[] getBank(int bank)
+        {
+            int offset = bank * 256;
+            byte[] bankBytes = new byte[256];
+            for (int i = 0; i < bankBytes.Length; i++)
             {
-                REVERSE_HEX[HEX[i]] = i;
+                bankBytes[i] = Memory[i + offset];
             }
+            return bankBytes;
         }
+
+        public void setBank(int bank, byte[] bytes)
+        {
+            int offset = bank * 256;
+            for (int i = 0; i < bytes.Length && i < 256; i++)
+            {
+                Memory[i + offset] = bytes[i];
+            }
+            ReadValues();
+            UpdateValues();
+            UpdateVisuals();
+        }
+
         public void ClearContents(int bank)
         {
             int start = bank * 256;
@@ -42,82 +65,6 @@ namespace KBComputing
             ReadValues();
             UpdateValues();
             UpdateVisuals();
-        }
-
-        public bool setContents(int bank, string style, string value)
-        {
-            string s = value;
-            //s = s.Replace(" ", "").Replace("\n", "").Replace("\r", "").ToUpper();
-            int w = 0+bank*256;
-            int h = 0;
-            byte b = 0;
-            for (int r = 0; r < s.Length; r++)
-            {
-                char c = s[r];
-                if( c >= 'a' && c <= 'z')
-                {
-                    c = (char)(c - 'a' + 'A');
-                }
-                if( !HEX.Contains(c))
-                {
-                    continue;
-                }
-                if (h == 0)
-                {
-                    //b = 0;
-                    b = REVERSE_HEX[c];
-                    h = 1;
-                } else
-                if (h == 1)
-                {
-                    b <<= 4;
-                    b |= REVERSE_HEX[c];
-                    Memory[w] = b;
-                    w++;
-                    h = 0;
-                }
-            }
-            ReadValues();
-            UpdateValues();
-            UpdateVisuals();
-            return true;
-        }
-
-        public string getContents(int bank, string style) {
-            //return "test string\n more text";
-            int offset = bank * 256;
-            StringBuilder sb = new StringBuilder();
-            sb.Clear();
-            for( int i = 0; i < 256; i++) 
-            {
-                if (i != 0)
-                {
-                    if (i % 256 == 0)
-                    {
-                        sb.Append("\n\n\n\n");
-                    }
-                    else
-                    if (i % 64 == 0)
-                    {
-                        sb.Append("\n\n");
-                    }
-                    else
-                    if (i % 8 == 0)
-                    {
-                        sb.Append("\n");
-                    }
-                    else
-                    if (i % 4 == 0)
-                    {
-                        sb.Append(" ");
-                    }
-                }
-                byte b = Memory[i+offset];
-                sb.Append((char)HEX[(b >> 4) & 0x0F]);
-                sb.Append((char)HEX[(b >> 0) & 0x0F]);
-                sb.Append(" ");
-            }
-            return sb.ToString();
         }
 
         /*
@@ -148,7 +95,9 @@ namespace KBComputing
         {
             Ram8 component = ((GameObject)data).GetComponent<Ram8>();
             if (component == null) return;
-            this.DisplayStyle = (string)component.DisplayStyle.Clone();
+            this.DisplayBank = component.DisplayBank;
+            this.DisplayOffset = component.DisplayOffset;
+            this.DisplayMode = (string)component.DisplayMode.Clone();
             this.Memory = (byte[])component.Memory.Clone();
             //public byte[] Memory = new byte[1024];
 
@@ -209,6 +158,5 @@ namespace KBComputing
             
             return true;
         }
-
     }
 }

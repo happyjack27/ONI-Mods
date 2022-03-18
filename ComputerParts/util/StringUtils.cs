@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KBComputing
+namespace KBComputing.util
 {
     public static class StringUtils
     {

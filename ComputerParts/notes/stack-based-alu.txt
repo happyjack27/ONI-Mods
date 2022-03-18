@@ -8,6 +8,8 @@ For more detailed explanation of how and why, read up on "Stack Machines".
 * https://en.wikipedia.org/wiki/Stack_machine
 * https://users.ece.cmu.edu/~koopman/stack_computers/chap6.html
 
+Note: The Stack ALU does not make a full microprocessor.  You will need other parts, such as memory, a clock, a data bus, etc.
+
 Inputs and Outputs
 ===================
 
@@ -48,7 +50,7 @@ Arithmetic and bitwise logic operations are performed by the following sequence:
 4. push result of operation (also sent to data out)
 Note:
 	Multiply and divide push TWO values onto the stack.
-	Only the last value pushed onto the stack is sent to data out.
+	Only the last value pushed onto the stack is sent to data out (during peek instruction).
 	To get the other value, pop the stack.
 5. set status flags
 
@@ -75,30 +77,30 @@ Pushing the stack when its full or poping it when it's empty will set the stack 
 Operation List (OpCodes)
 ===================
 00 - data / stack
-	0000 - standy (do nothing)
-	0001 - peek (send top of stack to data out)
-	0010 - pop (drop) discard top of stack
-	0011 - push (push data in to top of stack)
+	0000 - 0 - standby - (do nothing)
+	0001 - 1 - peek - (send top of stack to data out)
+	0010 - 2 - pop - (drop) discard top of stack
+	0011 - 3 - push - (push data in to top of stack)
 01 - special
-	0100 - increment top of stack
-	0101 - swap top and next (might change)
-	0110 - copyfrom stack index (if 0, returns the current size of the stack) 
-	0111 - undecided (write to stack?)
+	0100 - 4 - inc - increment top of stack
+	0101 - 5 - swap - swap top and next (might change)
+	0110 - 6 - copyfrom - copy from stack index (if 0, returns the current size of the stack) 
+	0111 - 7 - reserved - undecided (write to stack?)
 	swap top and next? ("swap") copy top? (""dup")  read from stack depth (top specifies index, data is copied to top)?  same thing but write next?
 10 - arithmetic
-	1000 - pop and add
-	1001 - pop and subtract
-	1010 - pop and multiply (pushes high bits on stack first, then low bits)
-	1011 - pop and divide/mod (pushes result on stack first, then remainder (modulus))
+	1000 - 8 - add - pop and add
+	1001 - 9 - sub - pop and subtract
+	1010 - A - mul - pop and multiply (pushes high bits on stack first, then low bits)
+	1011 - B - div - pop and divide/mod (pushes result on stack first, then remainder (modulus))
 11 - bitwise logic
-	1100 - pop and or
-	1101 - pop and and
-	1110 - pop and xor 
-	1111 - pop and xnor - spare instruction?
+	1100 - C - or - pop and or
+	1101 - D - and - pop and and
+	1110 - E - xor - pop and xor 
+	1111 - F - xnor - pop and xnor - spare instruction?
 
 Other Operations
 ===================
 How to do other operations with multiple steps:
-	to negate (take additive inverse): push 0, push value, subtract
+	to negate (take additive inverse): push 0, swap, subtract
 	to not (bitwise inverse): push 0, xnor.
 	duplicate stack top: push 1, copyfrom

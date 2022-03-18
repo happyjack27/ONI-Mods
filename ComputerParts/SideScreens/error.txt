@@ -1,0 +1,31 @@
+﻿Error in MemoryContentsSideScreen.MemoryContentsSideScreen.OnPrefabInit 
+System.NullReferenceException: Object reference not set to an instance of an object
+  at KBComputing.SideScreens.MemoryContentsSideScreen.OnPrefabInit () [0x0009a] in <cf89aa06f5254d06be80b4645925cb2d>:0 
+  at KMonoBehaviour.InitializeComponent () [0x00068] in <53ba8544b0394db88dcaac034e1fe553>:0 
+
+  at UnityEngine.Debug.LogError (System.Object message, UnityEngine.Object context) [0x00000] in <9fe2cbebfa394c8da6af069ec8cc9ef4>:0 
+  at Debug.LogError (System.Object obj, UnityEngine.Object context) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at DebugUtil.LogErrorArgs (UnityEngine.Object context, System.Object[] objs) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at DebugUtil.LogException (UnityEngine.Object context, System.String errorMessage, System.Exception e) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KMonoBehaviour.InitializeComponent () [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KMonoBehaviour.Awake () [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at UnityEngine.GameObject.SetActive (System.Boolean value) [0x00000] in <9fe2cbebfa394c8da6af069ec8cc9ef4>:0 
+  at KScreen.Show (System.Boolean show) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at DetailsScreen.<Refresh>b__40_0 (DetailsScreen+SideScreenRef scn) [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+  at System.Collections.Generic.List`1[T].ForEach (System.Action`1[T] action) [0x00000] in <695d1cc93cca45069c528c15c9fdd749>:0 
+  at DetailsScreen.Refresh (UnityEngine.GameObject go) [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+  at RootMenu.OnSelectObject (System.Object data) [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+  at EventSystem.Trigger (UnityEngine.GameObject go, System.Int32 hash, System.Object data) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KMonoBehaviour.Trigger (System.Int32 hash, System.Object data) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at SelectTool.Select (KSelectable new_selected, System.Boolean skipSound) [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+  at SelectTool.OnLeftClickDown (UnityEngine.Vector3 cursor_pos) [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+  at PlayerController.OnKeyDown (KButtonEvent e) [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+  at KInputHandler.HandleKeyDown (KButtonEvent e) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KInputHandler.HandleKeyDown (KButtonEvent e) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KInputHandler.HandleEvent (KInputEvent e) [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KInputController.Dispatch () [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KInputManager.Dispatch () [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at KInputManager.Update () [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at GameInputManager.Update () [0x00000] in <53ba8544b0394db88dcaac034e1fe553>:0 
+  at Global.Update () [0x00000] in <33cbadb4d53344698461e1b8bda03e57>:0 
+Build: U41-498381-V

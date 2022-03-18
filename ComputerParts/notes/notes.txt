@@ -1,0 +1,23 @@
+﻿
+expand muxes and demuxes to use ribbons?
+4-bit truth table PLC/ROM
+bit switches for values:
+0000
+0001
+... etc.
+
+can copy settings
+
+also have presets:
+AND
+OR
+PARITY
+0...15
+bit1
+bit2
+bit3
+bit4
+
+4:4 TRUTH TABLE / PLC / ROM
+
+if wire is connected, only outputs 1 bit.

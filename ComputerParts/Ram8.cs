@@ -11,7 +11,7 @@ using static EventSystem;
 namespace KBComputing
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    class Ram8 : baseClasses.Base4x2, IMemoryContents
+    class Ram8 : baseClasses.BaseLogic4x2OnChange, IMemoryContents
     {
 
         [Serialize]
@@ -19,7 +19,7 @@ namespace KBComputing
 
         [Serialize]
         public string DisplayStyle = "HEX"; // HEX char int stackops instructions 
-        static readonly string HEX = "0123456789ABCDEF";
+        static readonly char[] HEX = "0123456789ABCDEF".ToCharArray();
         static readonly byte[] REVERSE_HEX;
 
         public string ContentDisplayStyle { get { return DisplayStyle; } set { DisplayStyle = value; } }
@@ -39,62 +39,85 @@ namespace KBComputing
             {
                 Memory[i] = 0;
             }
+            ReadValues();
+            UpdateValues();
+            UpdateVisuals();
         }
 
-        public bool setContents(int bank, string value)
+        public bool setContents(int bank, string style, string value)
         {
-            string s = "" + value;
-            s = s.Replace(" ", "").Replace("\n", "").ToUpper();
+            string s = value;
+            //s = s.Replace(" ", "").Replace("\n", "").Replace("\r", "").ToUpper();
             int w = 0+bank*256;
             int h = 0;
             byte b = 0;
             for (int r = 0; r < s.Length; r++)
             {
+                char c = s[r];
+                if( c >= 'a' && c <= 'z')
+                {
+                    c = (char)(c - 'a' + 'A');
+                }
+                if( !HEX.Contains(c))
+                {
+                    continue;
+                }
                 if (h == 0)
                 {
-                    b = REVERSE_HEX[s[r]];
+                    //b = 0;
+                    b = REVERSE_HEX[c];
                     h = 1;
-                }
+                } else
                 if (h == 1)
                 {
                     b <<= 4;
-                    b |= REVERSE_HEX[s[r]];
+                    b |= REVERSE_HEX[c];
                     Memory[w] = b;
                     w++;
                     h = 0;
                 }
             }
+            ReadValues();
+            UpdateValues();
+            UpdateVisuals();
             return true;
         }
 
-        public string getContents(int bank) {
-            string s = "";
+        public string getContents(int bank, string style) {
+            //return "test string\n more text";
             int offset = bank * 256;
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
             for( int i = 0; i < 256; i++) 
             {
-                if (i % 256 == 0)
+                if (i != 0)
                 {
-                    s += "\n\n\n\n";
-                }
-                if (i % 64 == 0)
-                {
-                    s += "\n\n";
-                }
-                if (i % 16 == 0)
-                {
-                    s += "\n";
-                }
-                else
-                if (i % 4 == 0)
-                {
-                    s += " ";
+                    if (i % 256 == 0)
+                    {
+                        sb.Append("\n\n\n\n");
+                    }
+                    else
+                    if (i % 64 == 0)
+                    {
+                        sb.Append("\n\n");
+                    }
+                    else
+                    if (i % 8 == 0)
+                    {
+                        sb.Append("\n");
+                    }
+                    else
+                    if (i % 4 == 0)
+                    {
+                        sb.Append(" ");
+                    }
                 }
                 byte b = Memory[i+offset];
-                s += HEX[(b >> 4) & 0x0F];
-                s += HEX[(b >> 0) & 0x0F];
-                s += " ";
+                sb.Append((char)HEX[(b >> 4) & 0x0F]);
+                sb.Append((char)HEX[(b >> 0) & 0x0F]);
+                sb.Append(" ");
             }
-            return s;
+            return sb.ToString();
         }
 
         /*
@@ -121,6 +144,20 @@ namespace KBComputing
 
     };
         */
+        protected override void OnCopySettings(object data)
+        {
+            Ram8 component = ((GameObject)data).GetComponent<Ram8>();
+            if (component == null) return;
+            this.DisplayStyle = (string)component.DisplayStyle.Clone();
+            this.Memory = (byte[])component.Memory.Clone();
+            //public byte[] Memory = new byte[1024];
+
+            //[Serialize]
+            ReadValues();
+            UpdateValues();
+            UpdateVisuals();
+        }
+
         protected override void ReadValues()
         {
             PortValue00 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID00) ?? 0;
@@ -138,8 +175,8 @@ namespace KBComputing
         {
             int newOut = 0;
 
-            int dataIn  = (PortValue00 << 4 | PortValue01) & 0xFF;
-            int address = (PortValue02 << 4 | PortValue03) & 0xFF;
+            int dataIn  = (PortValue01 << 4 | PortValue00) & 0xFF;
+            int address = (PortValue03 << 4 | PortValue02) & 0xFF;
             int operation = PortValue13;
             int page_select = (PortValue13 >> 2) & 0x03;
             address = address | (page_select << 8);
@@ -155,8 +192,8 @@ namespace KBComputing
                 newOut = Memory[address] & 0xFF;
             }
 
-            int newOut0 = (newOut >> 4) & 0x0F;
-            int newOut1 = newOut & 0x0F;
+            int newOut1 = (newOut >> 4) & 0x0F;
+            int newOut0 = newOut & 0x0F;
 
             if (newOut0 != PortValue10)
             {

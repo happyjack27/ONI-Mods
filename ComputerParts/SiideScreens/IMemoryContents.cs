@@ -21,8 +21,8 @@ namespace KBComputing {
 	public interface IMemoryContents {
 
 		string ContentDisplayStyle { get; set; }
-		string getContents(int bank);
-		bool setContents(int bank, string value);
+		string getContents(int bank, string style);
+		bool setContents(int bank, string style, string value);
 
 		void ClearContents(int bank);
 

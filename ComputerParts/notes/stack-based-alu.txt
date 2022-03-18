@@ -41,7 +41,7 @@ The rest get their inputs from popping the stack.
 
 The top of the stack is always available on data out. (Except for the standby instruction?  I haven't decided.)
 
-Arithmetic and bitwise logic operations are performebed by the following sequence:
+Arithmetic and bitwise logic operations are performed by the following sequence:
 1. pop number for right-hand side of operation ("top")
 2. pop number for left-hand side of operation ("next")
 3. perform operation
@@ -82,7 +82,7 @@ Operation List (OpCodes)
 01 - special
 	0100 - increment top of stack
 	0101 - swap top and next (might change)
-	0110 - copy from stack index (if 0, returns the current size of the stack) 
+	0110 - copyfrom stack index (if 0, returns the current size of the stack) 
 	0111 - undecided (write to stack?)
 	swap top and next? ("swap") copy top? (""dup")  read from stack depth (top specifies index, data is copied to top)?  same thing but write next?
 10 - arithmetic
@@ -96,12 +96,9 @@ Operation List (OpCodes)
 	1110 - pop and xor 
 	1111 - pop and xnor - spare instruction?
 
-a pop can be don via push 0, and, or
-what is a peek 0? - (push 0, peek 0, could be a push) spare isntruction
-	
 Other Operations
 ===================
 How to do other operations with multiple steps:
 	to negate (take additive inverse): push 0, push value, subtract
 	to not (bitwise inverse): push 0, xnor.
-	to push a 1: push 0, increment
+	duplicate stack top: push 1, copyfrom

@@ -68,9 +68,9 @@ namespace KBComputing
                 StringUtils.AddStringTypes(typeof(Ram8Config));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Ram8Config.ID);
 
-                StringUtils.AddBuildingStrings(Stack8Config.ID, Stack8Config.NAME, Stack8Config.DESC, Stack8Config.EFFECT);
-                StringUtils.AddStringTypes(typeof(Ram8Config));
-                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Stack8Config.ID);
+                //StringUtils.AddBuildingStrings(Stack8Config.ID, Stack8Config.NAME, Stack8Config.DESC, Stack8Config.EFFECT);
+                //StringUtils.AddStringTypes(typeof(Ram8Config));
+                //ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Stack8Config.ID);
 
                 /*
                 StringUtils.AddBuildingStrings(Base2x2EveryTickConfig.ID, Base2x2EveryTickConfig.NAME, Base2x2EveryTickConfig.DESC, Base2x2EveryTickConfig.EFFECT);
@@ -94,7 +94,7 @@ namespace KBComputing
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TMuxConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(RisingEdgeCounterConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Ram8Config.ID);
-                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Stack8Config.ID);
+                    //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Stack8Config.ID);
                     //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2EveryTickConfig.ID);
                     //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2OnChangeConfig.ID);
                     //Base2x2OnChangeConfig

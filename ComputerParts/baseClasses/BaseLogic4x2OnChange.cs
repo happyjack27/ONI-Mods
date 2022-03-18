@@ -11,7 +11,7 @@ using static EventSystem;
 namespace KBComputing.baseClasses
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    abstract class Base4x2 :
+    abstract class BaseLogic4x2OnChange :
         //baseClasses.BaseLogicEveryTick
         baseClasses.BaseLogicOnChange
     {

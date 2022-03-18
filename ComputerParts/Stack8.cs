@@ -11,7 +11,7 @@ using static EventSystem;
 namespace KBComputing
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    class Stack8 : baseClasses.Base4x2
+    class Stack8 : baseClasses.BaseLogic4x2OnChange
     {
         [Serialize]
         public int LastClock = 0;

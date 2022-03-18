@@ -28,7 +28,7 @@ namespace KBComputing {
 
 		public override sealed void SetTarget(GameObject target) {
 			this.target = target.GetComponent<T>();
-			Load(gameObject);
+			Load(target);
 		}
 	}
 }

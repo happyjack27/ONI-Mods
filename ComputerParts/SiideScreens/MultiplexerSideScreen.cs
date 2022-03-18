@@ -18,7 +18,7 @@ namespace KBComputing {
 		}
 
 		protected override void OnPrefabInit() {
-			var margin = new RectOffset(8, 8, 8, 8);
+			var margin = new RectOffset(4, 4, 4, 4);
 			// Update the parameters of the base BoxLayoutGroup
 			var baseLayout = gameObject.GetComponent<BoxLayoutGroup>();
 			if (baseLayout != null)
@@ -32,7 +32,8 @@ namespace KBComputing {
 			var rowBG = PUITuning.Images.GetSpriteByName("overview_highlight_outline_sharp");
 			PScrollPane contentsContainer = new PScrollPane("contentsContainer")
 			{
-				//AlwaysShowHorizontal = (AlwaysShowVertical = true),
+				AlwaysShowHorizontal = true,
+				AlwaysShowVertical = true,
 				BackColor = PUITuning.Colors.Transparent,
 				Child = null,
 				FlexSize = Vector2.zero,
@@ -46,7 +47,7 @@ namespace KBComputing {
 				FlexSize = Vector2.one,
 				LineCount = 4,
 				MaxLength = 1024,
-				MinWidth = 64,
+				MinWidth = 128,
 				Text = null,
 				TextAlignment = TextAlignmentOptions.TopLeft,
 				TextStyle = PUITuning.Fonts.TextDarkStyle,
@@ -98,7 +99,7 @@ namespace KBComputing {
 			}).AddTo(gameObject);
 			ContentContainer = gameObject;
 			base.OnPrefabInit();
-			Load(gameObject);
+			//Load(gameObject);
 		}
 
 
@@ -111,12 +112,16 @@ namespace KBComputing {
 
         protected override void Store(GameObject _)
         {
-			target.setContents(bank, contents.Text);
+			if (target == null)
+				return;
+			target.setContents(bank, "HEX", contents.Text);
         }
 
         protected override void Load(GameObject _)
 		{
-			contents.Text = target.getContents(bank);
+			if (target == null)
+				return;
+			contents.Text = target.getContents(bank, "HEX");
         }
     }
 }

@@ -76,7 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="baseClasses\Base4x2.cs" />
+    <Compile Include="baseClasses\BaseLogic4x2OnChange.cs" />
     <Compile Include="baseClasses\BaseLogicOnChange.cs" />
     <Compile Include="baseClasses\Base2x2OnChangeConfig.cs" />
     <Compile Include="baseClasses\Base4x2Config.cs" />
@@ -173,6 +173,7 @@
     <Content Include="anim\assets\4x2\4x2.png" />
     <Content Include="notes\decoder outputs.txt" />
     <Content Include="notes\instructions.txt" />
+    <Content Include="notes\notes.txt" />
     <Content Include="notes\stack-based-alu.txt" />
     <Content Include="packages\ILMerge.3.0.40\tools\net452\ILMerge.exe" />
     <Content Include="packages\ILMerge.3.0.40\tools\net452\System.Compiler.dll" />

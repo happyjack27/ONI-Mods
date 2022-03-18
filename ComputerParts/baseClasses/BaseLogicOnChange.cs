@@ -22,6 +22,13 @@ namespace KBComputing.baseClasses
             OnLogicValueChangedDelegate = new EventSystem.IntraObjectHandler<BaseLogicOnChange>(
             (component, data) => component.OnLogicValueChanged(data)
             );
+        private static readonly EventSystem.IntraObjectHandler<BaseLogicOnChange>
+            OnCopySettingsDelegate = new EventSystem.IntraObjectHandler<BaseLogicOnChange>(
+            (component, data) => component.OnCopySettings(data));
+
+        protected virtual void OnCopySettings(object data)
+        {
+        }
 
         protected LogicPorts ports;
         protected KBatchedAnimController kbac;
@@ -30,6 +37,7 @@ namespace KBComputing.baseClasses
         {
             base.OnSpawn();
             gameObject.AddOrGet<CopyBuildingSettings>();
+            Subscribe((int)GameHashes.CopySettings, OnCopySettingsDelegate);
             Subscribe((int)GameHashes.LogicEvent, OnLogicValueChangedDelegate);
             this.ports = this.GetComponent<LogicPorts>();
             this.kbac = this.GetComponent<KBatchedAnimController>();

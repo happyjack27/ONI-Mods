@@ -31,10 +31,13 @@ namespace KBComputing
         public int ContentDisplayBank { get { return DisplayBank; } set { DisplayBank = value; } }
         public int ContentDisplayOffset { get { return DisplayOffset; } set { DisplayOffset = value; } }
 
-        public byte[] getBank(int bank)
+        public byte[] getBytes(int offset, int size)
         {
-            int offset = bank * 256;
-            byte[] bankBytes = new byte[256];
+            if( offset + size > Memory.Length )
+            {
+                size = Memory.Length - offset;
+            }
+            byte[] bankBytes = new byte[size];
             for (int i = 0; i < bankBytes.Length; i++)
             {
                 bankBytes[i] = Memory[i + offset];
@@ -42,10 +45,14 @@ namespace KBComputing
             return bankBytes;
         }
 
-        public void setBank(int bank, byte[] bytes)
+        public void setBytes(int offset, byte[] bytes)
         {
-            int offset = bank * 256;
-            for (int i = 0; i < bytes.Length && i < 256; i++)
+            int size = bytes.Length;
+            if (offset + size > Memory.Length)
+            {
+                size = Memory.Length - offset;
+            }
+            for (int i = 0; i < size; i++)
             {
                 Memory[i + offset] = bytes[i];
             }

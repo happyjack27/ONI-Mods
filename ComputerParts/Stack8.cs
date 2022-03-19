@@ -15,9 +15,21 @@ namespace KBComputing
     class Stack8 : baseClasses.BaseLogic4x2OnChange
     {
         [Serialize]
-        public int LastClock = 0;
+        public int LastClock = -1;
         [Serialize]
         public Stack<byte> Stack = new Stack<byte>();
+
+        protected override void OnCopySettings(object data)
+        {
+            Stack8 component = ((GameObject)data).GetComponent<Stack8>();
+            if (component == null) return;
+            this.Stack = new Stack<byte>(component.Stack.Reverse());
+
+            ReadValues();
+            UpdateValues();
+            UpdateVisuals();
+        }
+
 
         protected override void ReadValues()
         {
@@ -54,6 +66,7 @@ namespace KBComputing
                 {
                     //stack
                     case (int)StackOpCodes.standby:// = 0b0001,
+                    case (int)StackOpCodes.invalid:// = 0b0001,
                     case (int)StackOpCodes.peek:// = 0b0001,
                         break;
                     case (int)StackOpCodes.pop:// = 0b0001,
@@ -76,7 +89,7 @@ namespace KBComputing
                             Stack.Push((byte)b);
                         }
                         break;
-                    case (int)StackOpCodes.copy_from:// = 0b1000,
+                    case (int)StackOpCodes.copyfrom:// = 0b1000,
                         {
                             int a = Stack.Pop();
                             byte b = a == 0 ? (byte)Stack.Count : Stack.ElementAt(a);

@@ -16,7 +16,7 @@ namespace KBComputing.util
             "increment",
             "swap",
             "copyfrom",
-            "reserved",
+            "invalid",
             "add",
             "subtract",
             "multiply",
@@ -38,8 +38,8 @@ namespace KBComputing.util
         //other
         increment = 0b0100,
         swap = 0b0101,
-        copy_from = 0b0111,
-        copy_to = 0b0110,
+        copyfrom = 0b0110,
+        invalid = 0b0111,
         //arithmetic
         add = 0b1000,
         subtract = 0b1001,

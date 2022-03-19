@@ -9,21 +9,33 @@ namespace KBComputing.SideScreens {
 	internal sealed class MemoryContentsSideScreen : AbstractSideScreen<IMemoryContents>
 	{
 		int bank = 0;
+		int offset = 0;
 		string displayMode = "HEX";
 
 		protected IList<ListOption<string>> optionsDisplayMode;
 		protected IList<ListOption<int>> optionsBank;
+		protected IList<ListOption<int>> optionsBytes;
 
 		private GameObject contentField;
 		private GameObject displayModeField;
 		private GameObject bankField;
+		private GameObject bytesField;
 
 		private void BankOptionSelected(GameObject obj, ListOption<int> option)
 		{
 			bank = option.value;
 			if (target != null && target.ContentDisplayBank != bank)
-            {
+			{
 				target.ContentDisplayBank = bank;
+				Load(null);
+			}
+		}
+		private void BytesOptionSelected(GameObject obj, ListOption<int> option)
+		{
+			offset = option.value;
+			if (target != null && target.ContentDisplayOffset != offset)
+			{
+				target.ContentDisplayOffset = offset;
 				Load(null);
 			}
 		}
@@ -51,12 +63,37 @@ namespace KBComputing.SideScreens {
 		protected override void OnPrefabInit() {
 			optionsDisplayMode = new List<ListOption<string>>(2);
 			optionsBank = new List<ListOption<int>>(4);
+			optionsBytes = new List<ListOption<int>>(16);
 			optionsDisplayMode.Add(new ListOption<string>("HEX", "HEX"));
+			optionsDisplayMode.Add(new ListOption<string>("numbers", "numbers"));
 			optionsDisplayMode.Add(new ListOption<string>("stack ops", "stack ops"));
 			optionsBank.Add(new ListOption<int>(0, "0"));
 			optionsBank.Add(new ListOption<int>(1, "1"));
 			optionsBank.Add(new ListOption<int>(2, "2"));
 			optionsBank.Add(new ListOption<int>(3, "3"));
+			for( int i = 0; i < 256; i+= 16)
+            {
+				optionsBytes.Add(new ListOption<int>(i, $"{i} -  {i+15}"));
+			}
+			/*
+			optionsBytes.Add(new ListOption<int>(000, "  0 -  15"));
+			optionsBytes.Add(new ListOption<int>(016, " 16 -  31"));
+			optionsBytes.Add(new ListOption<int>(032, " 32 -  47"));
+			optionsBytes.Add(new ListOption<int>(048, " 48 -  63"));
+			optionsBytes.Add(new ListOption<int>(064, " 64 -  79"));
+			optionsBytes.Add(new ListOption<int>(080, " 80 -  95"));
+			optionsBytes.Add(new ListOption<int>(096, " 96 - 111"));
+			optionsBytes.Add(new ListOption<int>(112, "112 - 127"));
+
+			optionsBytes.Add(new ListOption<int>(000, "  0 -  15"));
+			optionsBytes.Add(new ListOption<int>(016, " 16 -  31"));
+			optionsBytes.Add(new ListOption<int>(032, " 32 -  47"));
+			optionsBytes.Add(new ListOption<int>(048, " 48 -  63"));
+			optionsBytes.Add(new ListOption<int>(064, " 64 -  79"));
+			optionsBytes.Add(new ListOption<int>(080, " 80 -  95"));
+			optionsBytes.Add(new ListOption<int>(096, " 96 - 111"));
+			optionsBytes.Add(new ListOption<int>(112, "112 - 127"));
+			*/
 
 			var margin = new RectOffset(4, 4, 4, 4);
 			// Update the parameters of the base BoxLayoutGroup
@@ -76,7 +113,7 @@ namespace KBComputing.SideScreens {
 				Alignment = TextAnchor.MiddleLeft,
 				Spacing = 10,
 				Direction = PanelDirection.Horizontal,
-				Margin = new RectOffset(8, 8, 8, 8)
+				Margin = new RectOffset(4, 4, 4, 4)
 			}.AddChild(new PLabel("DisplayModeLabel")
 			{
 				TextAlignment = TextAnchor.MiddleLeft,
@@ -104,7 +141,7 @@ namespace KBComputing.SideScreens {
 				Alignment = TextAnchor.MiddleCenter,
 				Spacing = 10,
 				Direction = PanelDirection.Horizontal,
-				Margin = new RectOffset(8, 8, 8, 8)
+				Margin = new RectOffset(4, 4, 4, 4)
 			}.AddChild(new PLabel("BankLabel")
 			{
 				TextAlignment = TextAnchor.MiddleLeft,
@@ -125,7 +162,35 @@ namespace KBComputing.SideScreens {
 			}.AddOnRealize((obj) => bankField = obj);
 			rowBank.AddChild(cbBank);
 			rowBank.AddTo(gameObject);
-			
+
+			PPanel rowBytes = new PPanel("BytesRow")
+			{
+				FlexSize = Vector2.one,
+				Alignment = TextAnchor.MiddleCenter,
+				Spacing = 10,
+				Direction = PanelDirection.Horizontal,
+				Margin = new RectOffset(4, 4, 4, 4)
+			}.AddChild(new PLabel("BytesLabel")
+			{
+				TextAlignment = TextAnchor.MiddleLeft,
+				ToolTip = "",
+				Text = "Bytes",
+				TextStyle = PUITuning.Fonts.TextDarkStyle,
+				FlexSize = Vector2.left,
+			});
+			var cbBytes = new PComboBox<ListOption<int>>("BytesSelect")
+			{
+				Content = optionsBytes,
+				InitialItem = optionsBytes[0],
+				FlexSize = Vector2.right,
+				ToolTip = "",
+				TextStyle = PUITuning.Fonts.TextLightStyle,
+				TextAlignment = TextAnchor.MiddleRight,
+				OnOptionSelected = BytesOptionSelected
+			}.AddOnRealize((obj) => bytesField = obj);
+			rowBytes.AddChild(cbBytes);
+			rowBytes.AddTo(gameObject);
+
 
 			PPanel rowContent = new PPanel("Panel") {
 				BackImage = rowBG,
@@ -143,9 +208,9 @@ namespace KBComputing.SideScreens {
 				BackColor = PUITuning.Colors.BackgroundLight,
 				FlexSize = new Vector2(8.0f, 8.0f),
 				//Vector2.one,
-				LineCount = 64,
-				MaxLength = 8192,
-				MinWidth = 64,
+				LineCount = 32,
+				MaxLength = 4096,
+				MinWidth = 128,
 				Text = "placeholder text",
 				TextAlignment = TextAlignmentOptions.TopLeft,
 				TextStyle = PUITuning.Fonts.TextDarkStyle,
@@ -218,20 +283,23 @@ namespace KBComputing.SideScreens {
 			if (target == null || contentField == null)
 				return;
 			string text = PTextField.GetText(contentField);
-			byte[] bytes = new byte[256];
+			byte[] bytes = new byte[16];
 			switch(displayMode)
             {
 				case "HEX":
-					bytes = util.MemoryTranslation.HEXtoBytes(256, text);
+					bytes = util.MemoryTranslation.HEXtoBytes(16, text);
 					break;
 				case "stack ops":
-					bytes = util.MemoryTranslation.StackOpsToBytes(256, text);
+					bytes = util.MemoryTranslation.StackOpsToBytes(16, text);
+					break;
+				case "numbers":
+					bytes = util.MemoryTranslation.NumbersToBytes(16, text);
 					break;
 				default:
 					bytes = new byte[] { 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, };
 					break;
 			}
-			target.setBank(bank, bytes);
+			target.setBytes(bank*256+offset, bytes);
 		}
 
 		protected override void Load(GameObject _)
@@ -253,7 +321,7 @@ namespace KBComputing.SideScreens {
 						break;
 					}
 				}
-
+				//.ContentDisplayOffset
 				bank = target.ContentDisplayBank;
 				for (int i = 0; i < optionsBank.Count; i++)
 				{
@@ -266,9 +334,21 @@ namespace KBComputing.SideScreens {
 					}
 				}
 
+				offset = target.ContentDisplayOffset;
+				for (int i = 0; i < optionsBytes.Count; i++)
+				{
+					if (optionsBytes[i].value == offset)
+					{
+						ListOption<int> option = optionsBytes[i];
+						if (bytesField != null)
+							PComboBox<ListOption<int>>.SetSelectedItem(bytesField, option);
+						break;
+					}
+				}
+
 				//displayModeField.set
 
-				byte[] bytes = target.getBank(bank);
+				byte[] bytes = target.getBytes(bank*256+offset,16);
 				string text = "";
 				switch (displayMode)
 				{
@@ -277,6 +357,9 @@ namespace KBComputing.SideScreens {
 						break;
 					case "stack ops":
 						text = util.MemoryTranslation.bytesToStackOps(bytes);
+						break;
+					case "numbers":
+						text = util.MemoryTranslation.bytesToNumbers(bytes);
 						break;
 					default:
 						text = "NO MATCHING TYPE FOUND!";

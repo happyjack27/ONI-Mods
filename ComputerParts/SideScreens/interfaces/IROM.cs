@@ -18,15 +18,9 @@
  */
 
 namespace KBComputing {
-	public interface IMemoryContents {
+	public interface IROM {
 
-		string ContentDisplayMode { get; set; }
-		int ContentDisplayBank { get; set; }
-		int ContentDisplayOffset { get; set; }
-		byte[] getBytes(int offset, int size);
-		void setBytes(int offset, byte[] values);
-
-		void ClearContents(int bank);
-
+		byte[] getBytes();
+		void setBytes(byte[] values);
 	}
 }

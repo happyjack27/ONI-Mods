@@ -74,7 +74,7 @@ namespace KBComputing
             int outputCellOne = this.ports.GetPortCell(WireToRibbonConfig.OUTPUT_PORT_ID);
             logicCircuitSystem.AddToNetworks(outputCellOne, this, true);
 
-            this.outputOne = new LogicPortVisualizer(outputCellOne, LogicPortSpriteType.Output);
+            this.outputOne = new LogicPortVisualizer(outputCellOne, LogicPortSpriteType.RibbonOutput);
             logicCircuitManager.AddVisElem((ILogicUIElement)this.outputOne);
 
             LogicCircuitManager.ToggleNoWireConnected(false, this.gameObject);

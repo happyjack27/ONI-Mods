@@ -8,7 +8,7 @@ namespace KBComputing.util
 {
     class MemoryTranslation
     {
-        static readonly System.Collections.Hashtable REVERSE_STACKOPS = new System.Collections.Hashtable();
+        static readonly Dictionary<string, byte> REVERSE_STACKOPS = new Dictionary<string, byte>();
 
         static readonly char[] HEX = "0123456789ABCDEF".ToCharArray();
         static readonly byte[] REVERSE_HEX;
@@ -23,7 +23,7 @@ namespace KBComputing.util
             for (int i = 0; i < StackOpCodeTranslate.NAMES.Length; i++)
             {
                 string name = StackOpCodeTranslate.NAMES[i];
-                REVERSE_STACKOPS.Add(name, i);
+                REVERSE_STACKOPS.Add(name, (byte)i);
             }
         }
 
@@ -83,17 +83,24 @@ namespace KBComputing.util
                     else
                     if (i % 64 == 0)
                     {
+                        sb.Append("\n\n\n");
+                    }
+                    else
+                    if (i % 16 == 0)
+                    {
                         sb.Append("\n\n");
                     }
                     else
+                    /*
                     if (i % 8 == 0)
                     {
                         sb.Append("\n");
                     }
                     else
+                    */
                     if (i % 4 == 0)
                     {
-                        sb.Append(" ");
+                        sb.Append("\n");
                     }
                 }
                 byte b = bytes[i];
@@ -123,13 +130,6 @@ namespace KBComputing.util
             }
             return sb.ToString().Trim();
         }
-        public static void Main(string[] args)
-        {
-            System.Console.Out.WriteLine("dfsd");
-            byte[] bb = new byte[] { 0,1,2,3,4,5,6,7};
-            System.Console.Out.WriteLine(bytesToStackOps(bb));
-            System.Console.Out.WriteLine("dfsd");
-        }
         public static byte[] StackOpsToBytes(int size, string value)
         {
             byte[] bytes = new byte[size];
@@ -140,25 +140,63 @@ namespace KBComputing.util
             byte b = 0;
             for (int i = 0; i < lines.Length && w < size; i++)
             {
-                string s = lines[i].Trim().ToLower();
-                if (s.Length <= 0)
+                string line = lines[i].Trim().ToLower();
+                if (line.Length <= 0)
                 {
                     continue;
                 }
                 if (h == 0)
                 {
-                    b = (byte)REVERSE_STACKOPS[s];
+                    byte c = REVERSE_STACKOPS.ContainsKey(line) ? REVERSE_STACKOPS[line] : (byte)StackOpCodes.invalid;
+                    b = c;
                     h = 1;
                 }
                 else
                 {
-                    byte c = (byte)REVERSE_STACKOPS[s];
+                    byte c = REVERSE_STACKOPS.ContainsKey(line) ? REVERSE_STACKOPS[line] : (byte)StackOpCodes.invalid;
                     b |= (byte)(c << 4);
-                    bytes[w++] = b;
+                    bytes[w] = b;
+                    w++;
                     h = 0;
                 }
             }
             return bytes;
+        }
+        public static byte[] NumbersToBytes(int size, string value)
+        {
+            byte[] bytes = new byte[size];
+
+            string[] lines = value.Trim().Split('\n');
+            int w = 0;
+            for (int i = 0; i < lines.Length && w < size; i++)
+            {
+                string line = lines[i].Trim().ToLower();
+                if (line.Length <= 0)
+                {
+                    continue;
+                }
+                int num = 0;
+                try
+                {
+                    num = Int16.Parse(line);
+                }
+                catch { }
+                bytes[w] = (byte)num;
+                w++;
+            }
+            return bytes;
+        }
+        public static string bytesToNumbers(byte[] bytes)
+        {
+            //return "test string\n more text";
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                sb.Append($"{(int)bytes[i]}");
+                sb.Append("\n");
+            }
+            return sb.ToString().Trim();
         }
     }
 }

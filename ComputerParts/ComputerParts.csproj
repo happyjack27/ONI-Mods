@@ -85,11 +85,13 @@
     <Compile Include="Rom4.cs" />
     <Compile Include="Rom4Config.cs" />
     <Compile Include="SideScreens\base\AbstractSideScreen.cs" />
-    <Compile Include="SideScreens\ListOption.cs" />
-    <Compile Include="SideScreens\SideScreenStrings.cs" />
     <Compile Include="SideScreens\interfaces\IMemoryContents.cs" />
-    <Compile Include="SideScreens\interfaces\IMultiplexed.cs" />
+    <Compile Include="SideScreens\interfaces\IROM.cs" />
+    <Compile Include="SideScreens\ListOption.cs" />
     <Compile Include="SideScreens\MemoryContentsSideScreen.cs" />
+    <Compile Include="SideScreens\Rom4SideScreen.cs" />
+    <Compile Include="SideScreens\SideScreenStrings.cs" />
+    <Compile Include="SideScreens\interfaces\IMultiplexed.cs" />
     <Compile Include="Stack8.cs" />
     <Compile Include="Ram8.cs" />
     <Compile Include="Stack8Config.cs" />
@@ -120,6 +122,8 @@
     <None Include="anim\assets\4x2blue\4x2_build.bytes" />
     <None Include="anim\assets\4x2blue\8bit.pdn" />
     <None Include="anim\assets\4x2blue\8bitui.pdn" />
+    <None Include="anim\assets\4rom\4rom_anim.bytes" />
+    <None Include="anim\assets\4rom\4rom_build.bytes" />
     <None Include="anim\assets\ribbon_to_ribbon\ribbon_to_ribbon_anim.bytes" />
     <None Include="anim\assets\ribbon_to_ribbon\ribbon_to_ribbon_build.bytes" />
     <None Include="anim\assets\logic_pulse_counter\logic_pulse_counter_anim.bytes" />
@@ -168,6 +172,7 @@
   <ItemGroup>
     <Content Include="anim\assets\4x2blue\4x2.png" />
     <Content Include="anim\assets\8bit_stack_alu\8bit_stack_alu.png" />
+    <Content Include="anim\assets\4rom\4rom.png" />
     <Content Include="anim\assets\ribbon_to_ribbon\ribbon_to_ribbon.png" />
     <Content Include="anim\assets\logic_pulse_counter\logic_pulse_counter.png" />
     <Content Include="anim\assets\tdemux\tdemux.png" />

@@ -21,10 +21,14 @@ namespace KBComputing
         [Serialize]
         public byte[] Memory = new byte[]
         {
-			0x00,0x01,0x02,0x03,
-			0x04,0x05,0x06,0x07,
-			0x08,0x09,0x0A,0x0B,
-			0x0C,0x0D,0x0E,0x0F,
+			0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00,
+			0x00, 0x00, 0x00, 0x00,
+			//0x00,0x01,0x02,0x03,
+			//0x04,0x05,0x06,0x07,
+			//0x08,0x09,0x0A,0x0B,
+			//0x0C,0x0D,0x0E,0x0F,
 		};
 
 		[Serialize] public int PortValue00 = 0;
@@ -59,7 +63,7 @@ namespace KBComputing
 			PortValue10 = this.GetComponent<LogicPorts>()?.GetOutputValue(Rom4Config.PORT_ID10) ?? 0;
 		}
 
-		protected override bool UpdateValues()
+		protected override void UpdateValues()
         {
 			int new_out = Memory[PortValue00];
 			if( PortValue10 != new_out)
@@ -68,7 +72,7 @@ namespace KBComputing
 				this.GetComponent<LogicPorts>().SendSignal(Rom4Config.PORT_ID10, PortValue10);
 			}
 
-			return true;
+			return;
         }
 
 		protected override void UpdateVisuals()

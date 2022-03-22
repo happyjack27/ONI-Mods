@@ -3,16 +3,40 @@ ribbon a (read channel selector)
 ===============================
 channel read selector (3 bits) 
 1bb stacks, 
-000 alu, 001 instruction pointer, 010 i/o data, 011 instruction value (load immediate)
+
+? other stack
+001 instruction pointer, 
+010 i/o data,
+011 instruction value (load immediate)
+
+00 - predicate
+01 - stack
+10 - transfer
+11 - ?
 
 ribbon b (write channel)
 ===============================
 channel write selector (3 bits) 
-1bb stacks, 
-000 alu, 001 instruction pointer, 010 i/o data, 011 i/o address
+001 instruction pointer, 
+010 i/o data, 011 i/o address
+
+read:
+data, stack1, stack2, ip, 
+write enable conditional (which flag, which value w bits)
+only use flags on one stack
+
+write:
+data, address
 
 transfer
 predicate
+00 stack op
+01 transfer op
+10 flow control
+
+push or peek
+
+
 
 ribbon c (alu control or stack control)
 ===============================

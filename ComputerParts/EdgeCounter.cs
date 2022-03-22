@@ -11,7 +11,7 @@ using static EventSystem;
 namespace KBComputing
 {
     [SerializationConfig(MemberSerialization.OptIn)]
-    class RisingEdgeCounter : WireToRibbon
+    class EdgeCounter : WireToRibbon
     {
         public override void LogicTick()
         {
@@ -27,7 +27,7 @@ namespace KBComputing
             CurrentOutput &= 0x0F;
             if (CurrentOutput != LastOutput)
             {
-                this.GetComponent<LogicPorts>().SendSignal(RisingEdgeCounterConfig.OUTPUT_PORT_ID, CurrentOutput);
+                this.GetComponent<LogicPorts>().SendSignal(EdgeCounterConfig.OUTPUT_PORT_ID, CurrentOutput);
                 LastOutput = CurrentOutput;
             }
             UpdateVisuals();

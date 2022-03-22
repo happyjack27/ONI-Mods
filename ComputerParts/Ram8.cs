@@ -127,7 +127,7 @@ namespace KBComputing
             PortValue13 = this.GetComponent<LogicPorts>()?.GetInputValue(Ram8Config.PORT_ID13) ?? 0;
         }
 
-        protected override bool UpdateValues()
+        protected override void UpdateValues()
         {
             int newOut = 0;
 
@@ -162,8 +162,6 @@ namespace KBComputing
                 PortValue11 = newOut1;
                 this.GetComponent<LogicPorts>().SendSignal(Ram8Config.PORT_ID11, PortValue11);
             }
-            
-            return true;
         }
     }
 }

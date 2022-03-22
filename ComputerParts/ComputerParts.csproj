@@ -76,6 +76,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="base\BaseLogic4x2EveryTick.cs" />
     <Compile Include="base\BaseLogic4x2OnChange.cs" />
     <Compile Include="base\BaseLogicOnChange.cs" />
     <Compile Include="base\Base2x2OnChangeConfig.cs" />
@@ -87,8 +88,10 @@
     <Compile Include="SideScreens\base\AbstractSideScreen.cs" />
     <Compile Include="SideScreens\interfaces\IMemoryContents.cs" />
     <Compile Include="SideScreens\interfaces\IROM.cs" />
+    <Compile Include="SideScreens\interfaces\IStack.cs" />
     <Compile Include="SideScreens\ListOption.cs" />
     <Compile Include="SideScreens\MemoryContentsSideScreen.cs" />
+    <Compile Include="SideScreens\Stack8SideScreen.cs" />
     <Compile Include="SideScreens\Rom4SideScreen.cs" />
     <Compile Include="SideScreens\SideScreenStrings.cs" />
     <Compile Include="SideScreens\interfaces\IMultiplexed.cs" />
@@ -98,8 +101,8 @@
     <Compile Include="Ram8Config.cs" />
     <Compile Include="base\BaseLogicEveryTick.cs" />
     <Compile Include="base\Base2x2EveryTickConfig.cs" />
-    <Compile Include="RisingEdgeCounter.cs" />
-    <Compile Include="RisingEdgeCounterConfig.cs" />
+    <Compile Include="EdgeCounter.cs" />
+    <Compile Include="EdgeCounterConfig.cs" />
     <Compile Include="TMux.cs" />
     <Compile Include="TDeMux.cs" />
     <Compile Include="TMuxConfig.cs" />

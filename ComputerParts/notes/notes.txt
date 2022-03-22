@@ -1,4 +1,104 @@
 ﻿
+
+0001 - 1 - peek - (send top of stack to data out)
+0011 - 3 - push - (push data in to top of stack)
+
+
+7 ribbons:
+
+16-bits
+
+clock
+
+data bus (includes address)
+instruction bus
+instruction address bus
+
+read selector
+read or write mode
+
+0001 0011 transfer from stack 1 to stack 2
+0011 0001 transfer from stack 2 to stack 1
+
+4-bit clock
+8-bit data bus
+8-bit instruction bus  - address out, address out, data in, data in.
+4-bit selector w r/w
+
+16-bit
+32-bit
+
+prdicate instruction write
+
+data line r/w
+instruction address line r/w
+instruction address condition (and which register?)
+
+write address
+data read
+data write
+
+read  (0011)
+	internal
+		instruction pointer
+		(next) instruction value (laod immediate)
+	external
+		data bus
+
+write (0001)
+	internal
+		instruction pointer
+	external
+		address bus
+		data bus
+
+	instruction data bus
+	instruction address bus
+
+0001 [read select]
+0011 [write select]
+
+everything is 16 ibts
+clock has 16 ticks
+1-16
+
+ribbon a (read channel selector)
+===============================
+channel read selector (3 bits) 
+1bb stacks, 
+
+? other stack
+001 instruction pointer, 
+010 i/o data,
+011 instruction value (load immediate)
+
+00 - predicate
+01 - stack
+10 - transfer
+11 - ?
+
+ribbon b (write channel)
+===============================
+channel write selector (3 bits) 
+001 instruction pointer, 
+010 i/o data, 011 i/o address
+
+read:
+data, stack1, stack2, ip, 
+write enable conditional (which flag, which value w bits)
+only use flags on one stack
+
+write:
+data, address
+
+transfer
+predicate
+00 stack op
+01 transfer op
+10 flow control
+
+
+
 expand muxes and demuxes to use ribbons?
 4-bit truth table PLC/ROM
 bit switches for values:

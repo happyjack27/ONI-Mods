@@ -8,9 +8,9 @@ namespace KBComputing.util
 {
     class MemoryTranslation
     {
-        static readonly Dictionary<string, byte> REVERSE_STACKOPS = new Dictionary<string, byte>();
+        public static readonly Dictionary<string, byte> REVERSE_STACKOPS = new Dictionary<string, byte>();
 
-        static readonly char[] HEX = "0123456789ABCDEF".ToCharArray();
+        public static readonly char[] HEX = "0123456789ABCDEF".ToCharArray();
         static readonly byte[] REVERSE_HEX;
         static MemoryTranslation()
         {

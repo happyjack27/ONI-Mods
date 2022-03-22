@@ -25,6 +25,9 @@ namespace KBComputing
             {
                 PUIUtils.AddSideScreenContent<SideScreens.MemoryContentsSideScreen>();
                 PUIUtils.AddSideScreenContent<SideScreens.Rom4SideScreen>();
+
+                PUIUtils.AddSideScreenContent<SideScreens.Stack8SideScreen>();
+
                 //PUIUtils.AddSideScreenContent<MultiplexerSideScreen>();
             }
         }
@@ -62,10 +65,11 @@ namespace KBComputing
                 StringUtils.AddStringTypes(typeof(TMuxConfig));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, TMuxConfig.ID);
 
-                StringUtils.AddBuildingStrings(RisingEdgeCounterConfig.ID, RisingEdgeCounterConfig.NAME, RisingEdgeCounterConfig.DESC, RisingEdgeCounterConfig.EFFECT);
-                StringUtils.AddStringTypes(typeof(RisingEdgeCounterConfig));
-                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, RisingEdgeCounterConfig.ID);
+                StringUtils.AddBuildingStrings(EdgeCounterConfig.ID, EdgeCounterConfig.NAME, EdgeCounterConfig.DESC, EdgeCounterConfig.EFFECT);
+                StringUtils.AddStringTypes(typeof(EdgeCounterConfig));
+                ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, EdgeCounterConfig.ID);
 
+                
                 StringUtils.AddBuildingStrings(Ram8Config.ID, Ram8Config.NAME, Ram8Config.DESC, Ram8Config.EFFECT);
                 StringUtils.AddStringTypes(typeof(Ram8Config));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Ram8Config.ID);
@@ -74,11 +78,12 @@ namespace KBComputing
                 StringUtils.AddStringTypes(typeof(Rom4Config));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Rom4Config.ID);
 
-                /*
+                
                 StringUtils.AddBuildingStrings(Stack8Config.ID, Stack8Config.NAME, Stack8Config.DESC, Stack8Config.EFFECT);
-                StringUtils.AddStringTypes(typeof(Ram8Config));
+                StringUtils.AddStringTypes(typeof(Stack8Config));
                 ModUtil.AddBuildingToPlanScreen(PlanMenuCategory.Automation, Stack8Config.ID);
-                */
+                
+                
 
                 /*
                 StringUtils.AddBuildingStrings(Base2x2EveryTickConfig.ID, Base2x2EveryTickConfig.NAME, Base2x2EveryTickConfig.DESC, Base2x2EveryTickConfig.EFFECT);
@@ -100,10 +105,12 @@ namespace KBComputing
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Reg4Config.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TDeMuxConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(TMuxConfig.ID);
-                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(RisingEdgeCounterConfig.ID);
+                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(EdgeCounterConfig.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Ram8Config.ID);
                     Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Rom4Config.ID);
-                    //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Stack8Config.ID);
+
+                    Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Stack8Config.ID);
+
                     //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2EveryTickConfig.ID);
                     //Db.Get().Techs.Get("Multiplexing").unlockedItemIDs.Add(Base2x2OnChangeConfig.ID);
                     //Base2x2OnChangeConfig

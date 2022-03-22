@@ -36,7 +36,7 @@ namespace KBComputing
         {
         }
 
-        protected override bool UpdateValues()
+        protected override void UpdateValues()
         {
             int PreviousControlPortValue = ControlPort1Value;
             int LastOutput = OutputValue;
@@ -74,7 +74,7 @@ namespace KBComputing
                 this.GetComponent<LogicPorts>().SendSignal(TDeMuxConfig.OUTPUT_PORT_ID1, OutputValue1);
                 this.GetComponent<LogicPorts>().SendSignal(TDeMuxConfig.OUTPUT_PORT_ID2, OutputValue2);
             }
-            return true;
+            return;
         }
 
 

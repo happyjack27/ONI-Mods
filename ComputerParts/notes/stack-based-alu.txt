@@ -48,7 +48,7 @@ Arithmetic and bitwise logic operations are performed by the following sequence:
 1. pop number for right-hand side of operation ("top")
 2. pop number for left-hand side of operation ("next")
 3. perform operation
-4. push result of operation (also sent to data out)
+4. push result of operation onto stack
 Note:
 	Multiply and divide push TWO values onto the stack.
 	Only the last value pushed onto the stack is sent to data out (during peek instruction).
@@ -64,6 +64,9 @@ And the operation is divide, then after the operation, the stack will look like 
 
 	next % top
 	next / top
+
+If you just want the quotient on the top of the stack, you'd then execute: pop
+If you just want the remainder on the top of the stack, you'd then execute: swap, pop to get rid of the quotient.
 
 There are four status flags, all available on the status flags output ribbon:
 	0001 - zero

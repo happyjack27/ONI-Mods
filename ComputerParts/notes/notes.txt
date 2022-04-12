@@ -1,5 +1,42 @@
 ﻿
 
+16-bit
+have code stored in memory (64k)
+clock is internal, every game tick.
+
+clock out, data available bit.
+
+data pins are for i/o, use an input queue, edge triggered read
+
+irq lines
+
+
+16 data queues, each higher priority.  first memory addresses are pointers to where to start execution
+0 is the idle thread
+cpu protects stack integrity between threads, and does call stack
+
+each data channel has its own pair of stacks and its own instruction pointer.
+a push on an empty queue makes it drop to a lower priority thread
+a pop on an empty stack clears the stacks, and resets the instruction pointer.
+
+
+
+instruciton bus
+00 address low out 
+01 address high out
+10 data low in
+11 data high in
+
+data bus
+
+request bus
+response bus
+data ready
+
+ethernet
+
+
+
 0001 - 1 - peek - (send top of stack to data out)
 0011 - 3 - push - (push data in to top of stack)
 

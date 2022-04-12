@@ -99,7 +99,7 @@ Operation List (OpCodes)
 11 - bitwise logic
 	1100 - C - or - pop and or
 	1101 - D - and - pop and and
-	1110 - E - xor - pop and xor 
+	1110 - E - xor - pop and xor
 	1111 - F - xnor - pop and xnor - spare instruction?
 
 Other Operations

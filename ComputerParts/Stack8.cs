@@ -196,8 +196,8 @@ namespace KBComputing
         public void sendOut(byte flags, bool sendData)
         {
             sbyte dataOut = (sbyte)(Stack.Count <= 0 ? 0 : Stack.Peek());
-            byte outHigh = (byte)((dataOut >> 4) & 0xFF);
-            byte outLow = (byte)(dataOut & 0xFF);
+            byte outHigh = (byte)((dataOut >> 4) & 0x0F);
+            byte outLow = (byte)(dataOut & 0x0F);
             PortValue10 = sendData ? outLow  : 0;
             PortValue11 = sendData ? outHigh : 0;
             this.GetComponent<LogicPorts>().SendSignal(Stack8Config.PORT_ID10, PortValue10);

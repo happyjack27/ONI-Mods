@@ -12,7 +12,7 @@ namespace KBComputing
         public static string anim = "logic_pulse_counter_kanim";
 
         public static LocString NAME = (LocString)"Edge Counter";
-        public static LocString DESC = (LocString)$"Counts the number of times the input chnages.";
+        public static LocString DESC = (LocString)$"Counts the number of times the input changes.";
         public static LocString EFFECT = DESC;
 
         public override BuildingDef CreateBuildingDef() => this.CreateBuildingDef(ID, anim, height: 1);
